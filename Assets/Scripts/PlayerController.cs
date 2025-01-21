@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerWheelRb;
     public float speed = 3.0f;
 
+    public Vector3 mousePosition3;
+    public Vector2 mousePosition2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +36,8 @@ public class PlayerController : MonoBehaviour
         playerWheelRb.AddForce(Vector3.right * speed * horizontalInput);
 
         playerGun.transform.position = playerWheelRb.transform.position + new Vector3(0,0.5f,0);
+
+        mousePosition3 = Input.mousePosition;
+        mousePosition2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 }
