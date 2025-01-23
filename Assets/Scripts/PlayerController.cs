@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour
     public GameObject playerGun;
 
     //Input Variables
-    public float horizontalInput;
-    public float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
     
     private Rigidbody playerWheelRb;
-    public float speed = 3.0f;
+    public float speed = 5.0f;
+
+    private int xBoundary = 7;
+    private int zBoundary = 5;
 
     //public Vector3 mousePosition3;
     //public Vector2 mousePosition2;
@@ -33,10 +36,24 @@ public class PlayerController : MonoBehaviour
         // transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         // transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
+        //Keep player in bounds
+        if(playerWheel.transform.position.x > xBoundary){
+            playerWheel.transform.position = new Vector3(xBoundary, playerWheel.transform.position.y, playerWheel.transform.position.z);
+        }
+        if(playerWheel.transform.position.x < -xBoundary){
+            playerWheel.transform.position = new Vector3(-xBoundary, playerWheel.transform.position.y, playerWheel.transform.position.z);
+        }
+        if(playerWheel.transform.position.z > zBoundary){
+            playerWheel.transform.position = new Vector3(playerWheel.transform.position.x, playerWheel.transform.position.y, zBoundary);
+        }
+        if(playerWheel.transform.position.z < -zBoundary){
+            playerWheel.transform.position = new Vector3(playerWheel.transform.position.x, playerWheel.transform.position.y, -zBoundary);
+        }
+
         playerWheelRb.AddForce(Vector3.forward * speed * verticalInput);
         playerWheelRb.AddForce(Vector3.right * speed * horizontalInput);
 
-        playerGun.transform.position = playerWheelRb.transform.position + new Vector3(0,0.5f,0); //Gun follows player
+        playerGun.transform.position = playerWheel.transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
         //Code for the gun to lock at the mouse
         Vector3 mousePositionScreen = Input.mousePosition;
