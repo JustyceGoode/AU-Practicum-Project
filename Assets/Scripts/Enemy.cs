@@ -8,11 +8,14 @@ public class Enemy : MonoBehaviour
     public GameObject enemyWheel;
     public GameObject enemyGun;
 
-    private float speed = 5.0f;
+    private float speed = 10.0f;
     private Rigidbody enemyWheelRb;
     public GameObject player;
 
     public float dist;
+
+    private int xBoundary = 7;
+    private int zBoundary = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +33,25 @@ public class Enemy : MonoBehaviour
 
         dist = Vector3.Distance(enemyWheel.transform.position, player.transform.position);
 
-        if(dist > 3.0f){
+        if(dist > 3.25f){
             enemyWheelRb.AddForce(followDirection * speed);
         }
-        else if(dist < 3.0f){
+        else if(dist < 2.75f){
             enemyWheelRb.AddForce(-followDirection * speed);
+        }
+
+        //Keep enemy in bounds
+        if(enemyWheel.transform.position.x > xBoundary){
+            enemyWheel.transform.position = new Vector3(xBoundary, enemyWheel.transform.position.y, enemyWheel.transform.position.z);
+        }
+        if(enemyWheel.transform.position.x < -xBoundary){
+            enemyWheel.transform.position = new Vector3(-xBoundary, enemyWheel.transform.position.y, enemyWheel.transform.position.z);
+        }
+        if(enemyWheel.transform.position.z > zBoundary){
+            enemyWheel.transform.position = new Vector3(enemyWheel.transform.position.x, enemyWheel.transform.position.y, zBoundary);
+        }
+        if(enemyWheel.transform.position.z < -zBoundary){
+            enemyWheel.transform.position = new Vector3(enemyWheel.transform.position.x, enemyWheel.transform.position.y, -zBoundary);
         }
 
         //enemyWheelRb.AddForce(followDirection * speed);
