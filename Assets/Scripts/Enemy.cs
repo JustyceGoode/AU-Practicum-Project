@@ -23,8 +23,17 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Vector3 followDirection = (player.transform.position - enemyWheel.transform.position).normalized;
-        Vector3 lookDirection = followDirection;
+        Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(enemyGun.transform.position.x, enemyGun.transform.position.z);
+        lookDirection = lookDirection.normalized;
+
+        // while(Vector3.Distance(enemyWheel.transform.position, player.transform.position) > 1){
+        //     enemyWheelRb.AddForce(followDirection * speed);
+        // }
 
         enemyWheelRb.AddForce(followDirection * speed);
+        enemyGun.transform.position = enemyWheel.transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
+
+        float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
+        enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
     }
 }
