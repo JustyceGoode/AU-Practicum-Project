@@ -8,9 +8,11 @@ public class Enemy : MonoBehaviour
     public GameObject enemyWheel;
     public GameObject enemyGun;
 
-    private float speed = 3.0f;
+    private float speed = 5.0f;
     private Rigidbody enemyWheelRb;
     public GameObject player;
+
+    public float dist;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +28,16 @@ public class Enemy : MonoBehaviour
         Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(enemyGun.transform.position.x, enemyGun.transform.position.z);
         lookDirection = lookDirection.normalized;
 
-        // while(Vector3.Distance(enemyWheel.transform.position, player.transform.position) > 1){
-        //     enemyWheelRb.AddForce(followDirection * speed);
-        // }
+        dist = Vector3.Distance(enemyWheel.transform.position, player.transform.position);
 
-        enemyWheelRb.AddForce(followDirection * speed);
+        if(dist > 3.0f){
+            enemyWheelRb.AddForce(followDirection * speed);
+        }
+        else if(dist < 3.0f){
+            enemyWheelRb.AddForce(-followDirection * speed);
+        }
+
+        //enemyWheelRb.AddForce(followDirection * speed);
         enemyGun.transform.position = enemyWheel.transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
 
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
