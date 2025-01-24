@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerWheelRb;
-    public float speed = 5.0f;
+    public float speed = 10.0f;
 
     private int xBoundary = 7;
     private int zBoundary = 5;
