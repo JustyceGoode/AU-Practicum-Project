@@ -663,8 +663,9 @@ GameObject:
   - component: {fileID: 683070809}
   - component: {fileID: 683070808}
   - component: {fileID: 683070807}
+  - component: {fileID: 683070810}
   m_Layer: 0
-  m_Name: Player Wheel
+  m_Name: Enemy Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,6 +757,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683070805}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &683070810
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683070805}
+  serializedVersion: 4
+  m_Mass: 5
+  m_Drag: 2
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &692507364
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,8 +832,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerWheel: {fileID: 1090831589}
   playerGun: {fileID: 625813921}
-  horizontalInput: 0
-  verticalInput: 0
   speed: 5
 --- !u!1 &705507993
 GameObject:
@@ -1135,6 +1161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1459129611}
+  - component: {fileID: 1459129612}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1159,6 +1186,21 @@ Transform:
   - {fileID: 1559621582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1459129612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459129610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f14a781deeef8a4bbe18d46ac433413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyWheel: {fileID: 683070805}
+  enemyGun: {fileID: 1559621581}
+  player: {fileID: 1090831589}
 --- !u!1 &1487097891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1321,7 @@ GameObject:
   - component: {fileID: 1559621584}
   - component: {fileID: 1559621583}
   m_Layer: 0
-  m_Name: Player Gun
+  m_Name: Enemy Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
