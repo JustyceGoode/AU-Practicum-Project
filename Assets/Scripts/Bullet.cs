@@ -23,4 +23,9 @@ public class Bullet : MonoBehaviour
         }
 
     }
+
+    // private void OnTriggerEnter(Collider other){
+    //     other.healthPoints -= 10f;
+    //     Destroy(gameObject);
+    // }
 }
