@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
+    //private float healthPoints = 30f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         playerWheelRb.AddForce(Vector3.right * speed * horizontalInput);
 
         playerGun.transform.position = playerWheel.transform.position + new Vector3(0,0.5f,0); //Gun follows player
+        //transform.position = playerWheel.transform.position;
 
         //Code for the gun to lock at the mouse
         Vector3 mousePositionScreen = Input.mousePosition;
@@ -68,5 +71,14 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
         }
+
+        // if(healthPoints <= 0){
+        //     Debug.Log("Game over!");
+        // }
     }
+
+    // private void OnTriggerEnter(Collider other){
+    //     healthPoints -= 10f;
+    //     Destroy(other.gameObject);
+    // }
 }

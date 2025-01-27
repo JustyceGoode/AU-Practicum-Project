@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
     private float timePassed = 0f;
 
+    //private float healthPoints = 30f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,5 +70,14 @@ public class Enemy : MonoBehaviour
             Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
             timePassed = 0f;
         }
+
+        // if(healthPoints <= 0){
+        //     Destroy(gameObject);
+        // }
     }
+
+    // private void OnTriggerEnter(Collider other){
+    //     healthPoints -= 10f;
+    //     Destroy(other.gameObject);
+    // }
 }
