@@ -13,13 +13,14 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerWheelRb;
-    private float speed = 15.0f;
+    private float speed = 20.0f;
 
+    //World Boundary
     private int xBoundary = 7;
     private int zBoundary = 5;
 
-    //public Vector3 mousePosition3;
-    //public Vector2 mousePosition2;
+    //Bullets
+    public GameObject bulletPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +64,9 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(playerGun.transform.position.x, playerGun.transform.position.z);
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
+
+        if(Input.GetMouseButtonDown(0)){
+            Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
+        }
     }
 }
