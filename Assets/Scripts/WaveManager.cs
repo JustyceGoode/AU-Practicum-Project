@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public GameObject portalPrefab;
+    public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
     public GameObject medkitPrefab;
     public Vector3[] portalSpawnPoints = {
@@ -38,6 +39,8 @@ public class WaveManager : MonoBehaviour
             }
             if(itemCount <= 0){
                 Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
+                Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
+                Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
                 waveBreak = true;
             }
         }
@@ -47,5 +50,11 @@ public class WaveManager : MonoBehaviour
     private Vector3 GeneratePortalSpawnPosition(){
         int pointIndex = Random.Range(0,3);
         return portalSpawnPoints[pointIndex];
+    }
+
+    private Vector3 GenerateEnemySpawnPosition(){
+        int enemyXPoint = Random.Range(-6,6);
+        int enemyZPoint = Random.Range(-4,4);
+        return new Vector3(enemyXPoint,1,enemyZPoint);
     }
 }
