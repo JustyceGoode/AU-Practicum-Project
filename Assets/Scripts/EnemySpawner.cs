@@ -16,10 +16,10 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timePassed += Time.deltaTime;
-        if(timePassed > 5f){
-            Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
-            timePassed = 0f;
-        }
+        // timePassed += Time.deltaTime;
+        // if(timePassed > 5f){
+        //     Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
+        //     timePassed = 0f;
+        // }
     }
 }

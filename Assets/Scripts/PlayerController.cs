@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Get components of the player
-    public GameObject playerWheel;
     public GameObject playerGun;
 
     //Input Variables
-    private float horizontalInput;
-    private float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
     
-    private Rigidbody playerWheelRb;
+    private Rigidbody playerRb;
     private float speed = 20.0f;
 
     //World Boundary
@@ -22,12 +21,12 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    //private float healthPoints = 30f;
+    private float healthPoints = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerWheelRb = playerWheel.GetComponent<Rigidbody>();
+        playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,24 +39,23 @@ public class PlayerController : MonoBehaviour
         // transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
         //Keep player in bounds
-        if(playerWheel.transform.position.x > xBoundary){
-            playerWheel.transform.position = new Vector3(xBoundary, playerWheel.transform.position.y, playerWheel.transform.position.z);
-        }
-        if(playerWheel.transform.position.x < -xBoundary){
-            playerWheel.transform.position = new Vector3(-xBoundary, playerWheel.transform.position.y, playerWheel.transform.position.z);
-        }
-        if(playerWheel.transform.position.z > zBoundary){
-            playerWheel.transform.position = new Vector3(playerWheel.transform.position.x, playerWheel.transform.position.y, zBoundary);
-        }
-        if(playerWheel.transform.position.z < -zBoundary){
-            playerWheel.transform.position = new Vector3(playerWheel.transform.position.x, playerWheel.transform.position.y, -zBoundary);
-        }
+        // if(transform.position.x > xBoundary){
+        //     transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        // }
+        // if(transform.position.x < -xBoundary){
+        //     transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+        // }
+        // if(transform.position.z > zBoundary){
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
+        // }
+        // if(transform.position.z < -zBoundary){
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
+        // }
 
-        playerWheelRb.AddForce(Vector3.forward * speed * verticalInput);
-        playerWheelRb.AddForce(Vector3.right * speed * horizontalInput);
+        playerRb.AddForce(Vector3.forward * speed * verticalInput);
+        playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
-        playerGun.transform.position = playerWheel.transform.position + new Vector3(0,0.5f,0); //Gun follows player
-        //transform.position = playerWheel.transform.position;
+        playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
         //Code for the gun to lock at the mouse
         Vector3 mousePositionScreen = Input.mousePosition;
@@ -68,13 +66,13 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        if(Input.GetMouseButtonDown(0)){
-            Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
-        }
-
-        // if(healthPoints <= 0){
-        //     Debug.Log("Game over!");
+        // if(Input.GetMouseButtonDown(0)){
+        //     Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
         // }
+
+        if(healthPoints <= 0){
+            Debug.Log("Game over!");
+        }
     }
 
     // private void OnTriggerEnter(Collider other){
