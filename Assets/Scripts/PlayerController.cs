@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private float healthPoints = 40f;
+    private float healthPoints = 30f;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0)){
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
+            //Instantiate(bulletPrefab, playerGun.transform.position + new Vector3(Math.Cos(-mouseAngle), 0, Math.Sin(-mouseAngle)), playerGun.transform.rotation);
         }
 
         if(healthPoints <= 0){
@@ -76,7 +78,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other){
-        healthPoints -= 10f;
-        Destroy(other.gameObject);
+        if(other.gameObject.CompareTag("Enemy")){
+            healthPoints -= 10f;
+            Destroy(other.gameObject);
+        }
     }
 }
