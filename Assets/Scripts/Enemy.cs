@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
     private float timePassed = 0f;
 
-    //private float healthPoints = 30f;
+    private float healthPoints = 40f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,19 +65,19 @@ public class Enemy : MonoBehaviour
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
         enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
 
-        // timePassed += Time.deltaTime;
-        // if(timePassed > 2f){
-        //     Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
-        //     timePassed = 0f;
-        // }
+        timePassed += Time.deltaTime;
+        if(timePassed > 2f){
+            Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
+            timePassed = 0f;
+        }
 
-        // if(healthPoints <= 0){
-        //     Destroy(gameObject);
-        // }
+        if(healthPoints <= 0){
+            Destroy(gameObject);
+        }
     }
 
-    // private void OnTriggerEnter(Collider other){
-    //     healthPoints -= 10f;
-    //     Destroy(other.gameObject);
-    // }
+    private void OnTriggerEnter(Collider other){
+        healthPoints -= 10f;
+        Destroy(other.gameObject);
+    }
 }

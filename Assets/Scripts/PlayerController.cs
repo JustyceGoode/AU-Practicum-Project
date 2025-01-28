@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private float healthPoints = 30f;
+    private float healthPoints = 40f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,18 +39,18 @@ public class PlayerController : MonoBehaviour
         // transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
         //Keep player in bounds
-        // if(transform.position.x > xBoundary){
-        //     transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
-        // }
-        // if(transform.position.x < -xBoundary){
-        //     transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
-        // }
-        // if(transform.position.z > zBoundary){
-        //     transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
-        // }
-        // if(transform.position.z < -zBoundary){
-        //     transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
-        // }
+        if(transform.position.x > xBoundary){
+            transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x < -xBoundary){
+            transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+        }
+        if(transform.position.z > zBoundary){
+            transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
+        }
+        if(transform.position.z < -zBoundary){
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
+        }
 
         playerRb.AddForce(Vector3.forward * speed * verticalInput);
         playerRb.AddForce(Vector3.right * speed * horizontalInput);
@@ -66,17 +66,17 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        // if(Input.GetMouseButtonDown(0)){
-        //     Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
-        // }
+        if(Input.GetMouseButtonDown(0)){
+            Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
+        }
 
         if(healthPoints <= 0){
             Debug.Log("Game over!");
         }
     }
 
-    // private void OnTriggerEnter(Collider other){
-    //     healthPoints -= 10f;
-    //     Destroy(other.gameObject);
-    // }
+    private void OnTriggerEnter(Collider other){
+        healthPoints -= 10f;
+        Destroy(other.gameObject);
+    }
 }
