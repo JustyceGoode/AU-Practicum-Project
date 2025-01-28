@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 625813924}
   - component: {fileID: 625813923}
   - component: {fileID: 625813922}
+  - component: {fileID: 625813926}
   m_Layer: 0
   m_Name: Player Gun
   m_TagString: Untagged
@@ -265,9 +266,9 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -336,6 +337,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1090831593}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!65 &625813926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625813921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 2}
+  m_Center: {x: 0, y: 4.2351647e-22, z: 0}
 --- !u!1 &692507364
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalPrefab: {fileID: 113138836821481929, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
+  enemyPrefab: {fileID: 2000503271543225230, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
   powerUpPrefab: {fileID: 2639097842745182424, guid: 7aef42789c8ca2e46aaca58be8b923fa, type: 3}
   medkitPrefab: {fileID: 5655500752415899471, guid: 51264d91cd05623468aae4aa520a8311, type: 3}
   portalSpawnPoints:
