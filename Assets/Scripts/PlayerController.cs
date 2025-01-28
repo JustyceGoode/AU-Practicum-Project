@@ -82,5 +82,8 @@ public class PlayerController : MonoBehaviour
             healthPoints -= 10f;
             Destroy(other.gameObject);
         }
+        if(other.gameObject.CompareTag("Item")){
+            Destroy(other.gameObject);
+        }
     }
 }
