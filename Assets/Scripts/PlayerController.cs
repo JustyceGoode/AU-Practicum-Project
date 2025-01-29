@@ -24,10 +24,14 @@ public class PlayerController : MonoBehaviour
 
     private float healthPoints = 30f;
 
+    public AudioClip shootSound;
+    private AudioSource playerAudio;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0)){
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
-            //Instantiate(bulletPrefab, playerGun.transform.position + new Vector3(Math.Cos(-mouseAngle), 0, Math.Sin(-mouseAngle)), playerGun.transform.rotation);
+            playerAudio.PlayOneShot(shootSound, 0.15f);
         }
 
         if(healthPoints <= 0){
