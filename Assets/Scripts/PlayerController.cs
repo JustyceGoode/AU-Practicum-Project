@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private float healthPoints = 30f;
+    private int healthPoints = 100;
+    public TextMeshProUGUI playerHpText;
 
     public AudioClip shootSound;
     private AudioSource playerAudio;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
+        playerHpText.text = "Player HP: " + healthPoints + " / 100";
     }
 
     // Update is called once per frame
@@ -83,7 +85,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
-            healthPoints -= 10f;
+            healthPoints -= 10;
+            playerHpText.text = "Player HP: " + healthPoints + " / 100";
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){
