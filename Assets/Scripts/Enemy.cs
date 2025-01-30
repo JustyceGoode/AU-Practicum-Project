@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
     private float timePassed = 0f;
 
-    private float healthPoints = 30f;
+    private int healthPoints = 30;
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
     //private AudioSource enemyAudio;
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            healthPoints -= 10f;
+            healthPoints -= 10;
             Destroy(other.gameObject);
         }
     }
