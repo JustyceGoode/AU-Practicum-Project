@@ -151,6 +151,7 @@ MonoBehaviour:
   player: {fileID: 0}
   dist: 0
   bulletPrefab: {fileID: 7454578394929304622, guid: 7f46f3958e4a2d243bbc8f0e58ebcbd2, type: 3}
+  explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
 --- !u!1 &6802479738738185661
 GameObject:
   m_ObjectHideFlags: 0
