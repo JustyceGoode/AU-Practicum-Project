@@ -7,7 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     private float timePassed = 0f;
 
-    private float healthPoints = 50f;
+    private int healthPoints = 50;
+    public int playerAttackDamage = PlayerController.attackDamage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
@@ -37,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
 
         private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            healthPoints -= 10f;
+            healthPoints -= playerAttackDamage;
             Destroy(other.gameObject);
         }
     }

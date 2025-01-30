@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody enemyRb;
     public GameObject player;
 
-    public float dist;
+    private float dist;
 
     private int xBoundary = 7;
     private int zBoundary = 5;
@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     private int healthPoints = 30;
+    public int playerAttackDamage = PlayerController.attackDamage;
+
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
     //private AudioSource enemyAudio;
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            healthPoints -= 10;
+            healthPoints -= playerAttackDamage;
             Destroy(other.gameObject);
         }
     }

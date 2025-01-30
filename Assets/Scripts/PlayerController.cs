@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private int healthPoints = 100;
     public TextMeshProUGUI playerHpText;
-    private int attackDamage = 10;
+    public static int attackDamage = 10;
     private float fireRate = 0.4f;
     private float canFire = 0f;
 
