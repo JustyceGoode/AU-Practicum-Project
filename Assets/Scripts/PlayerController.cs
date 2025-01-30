@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private int healthPoints = 100;
     public TextMeshProUGUI playerHpText;
+    private int attackDamage = 10;
+    private float fireRate = 0.4f;
+    private float canFire = 0f;
 
     public AudioClip shootSound;
     private AudioSource playerAudio;
@@ -73,7 +76,8 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && Time.time > canFire){
+            canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
         }
