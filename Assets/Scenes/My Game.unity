@@ -958,6 +958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 2167633232741342639, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
+      propertyPath: explosionParticle
+      value: 
+      objectReference: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
     - target: {fileID: 4578869834338832737, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.06

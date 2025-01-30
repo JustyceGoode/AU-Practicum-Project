@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
 
         if(healthPoints <= 0){
             GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
-            Destroy(explosion, 10.0f);
+            Destroy(explosion, 2.0f);
             Destroy(gameObject);
         }
     }

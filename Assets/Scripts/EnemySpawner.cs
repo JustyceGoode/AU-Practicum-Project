@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
 
     private float healthPoints = 50f;
 
+    public ParticleSystem explosionParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class EnemySpawner : MonoBehaviour
         }
 
         if(healthPoints < 0){
+            GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
+            Destroy(explosion, 2.0f);
             Destroy(gameObject);
         }
     }
