@@ -89,6 +89,14 @@ public class PlayerController : MonoBehaviour
             playerHpText.text = "Player HP: " + healthPoints + " / 100";
             Destroy(other.gameObject);
         }
+        if(other.gameObject.CompareTag("Medkit")){
+            healthPoints += 30;
+            if(healthPoints > 100){
+                healthPoints = 100;
+            }
+            playerHpText.text = "Player HP: " + healthPoints + " / 100";
+            Destroy(other.gameObject);
+        }
         if(other.gameObject.CompareTag("Item")){
             Destroy(other.gameObject);
         }
