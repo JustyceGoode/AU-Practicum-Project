@@ -933,6 +933,10 @@ PrefabInstance:
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 7454578394929304622, guid: 7f46f3958e4a2d243bbc8f0e58ebcbd2, type: 3}
+    - target: {fileID: 1341084934044665465, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
+      propertyPath: explosionParticle
+      value: 
+      objectReference: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
     - target: {fileID: 2000503271543225230, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
       propertyPath: m_Name
       value: Enemy
