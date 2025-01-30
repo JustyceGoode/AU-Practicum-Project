@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0)){
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
-            playerAudio.PlayOneShot(shootSound, 0.15f);
+            playerAudio.PlayOneShot(shootSound, 0.4f);
         }
 
         if(healthPoints <= 0){

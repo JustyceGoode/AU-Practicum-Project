@@ -21,14 +21,16 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     private float healthPoints = 30f;
-
     public ParticleSystem explosionParticle;
+    public AudioClip explosionSound;
+    //private AudioSource enemyAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        //enemyAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -74,8 +76,9 @@ public class Enemy : MonoBehaviour
         }
 
         if(healthPoints <= 0){
-            GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
-            Destroy(explosion, 2.0f);
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
+            GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
+            Destroy(explosionEffect, 2.0f);
             Destroy(gameObject);
         }
     }

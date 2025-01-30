@@ -934,6 +934,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7454578394929304622, guid: 7f46f3958e4a2d243bbc8f0e58ebcbd2, type: 3}
     - target: {fileID: 1341084934044665465, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
+      propertyPath: explosionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
+    - target: {fileID: 1341084934044665465, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
       propertyPath: explosionParticle
       value: 
       objectReference: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
@@ -958,6 +962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 2167633232741342639, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
+      propertyPath: explosionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
     - target: {fileID: 2167633232741342639, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: explosionParticle
       value: 
