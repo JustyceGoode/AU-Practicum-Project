@@ -71,11 +71,18 @@ public class Enemy : MonoBehaviour
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
         enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
 
-        timePassed += Time.deltaTime;
-        if(timePassed > 2f){
-            Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
-            timePassed = 0f;
+        if(PlayerController.isGameActive){
+            timePassed += Time.deltaTime;
+            if(timePassed > 2f){
+                Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
+                timePassed = 0f;
+            }
         }
+        // timePassed += Time.deltaTime;
+        // if(timePassed > 2f){
+        //     Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
+        //     timePassed = 0f;
+        // }
 
         if(healthPoints <= 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
