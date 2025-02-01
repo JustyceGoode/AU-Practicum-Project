@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Item
   - Medkit
+  - Health Power Up
   layers:
   - Default
   - TransparentFX

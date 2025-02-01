@@ -1011,6 +1011,7 @@ MonoBehaviour:
   portalPrefab: {fileID: 113138836821481929, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
   enemyPrefab: {fileID: 2000503271543225230, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
   powerUpPrefab: {fileID: 2639097842745182424, guid: 7aef42789c8ca2e46aaca58be8b923fa, type: 3}
+  healthPowerUpPrefab: {fileID: 600991940241909673, guid: 99fca56a0fb1f024d873cda1e4c62658, type: 3}
   medkitPrefab: {fileID: 5655500752415899471, guid: 51264d91cd05623468aae4aa520a8311, type: 3}
   portalSpawnPoints:
   - {x: 5, y: 1, z: 3}

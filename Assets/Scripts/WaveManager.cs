@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
     public GameObject portalPrefab;
     public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
+    public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
     public Vector3[] portalSpawnPoints = {
         new Vector3(5,1,3),
@@ -32,8 +33,9 @@ public class WaveManager : MonoBehaviour
 
         if(enemyCount == 0 && portalCount == 0){
             if(waveBreak){
-                Instantiate(powerUpPrefab, new Vector3(1,1,0), powerUpPrefab.transform.rotation);
-                Instantiate(medkitPrefab, new Vector3(-1,1,0), medkitPrefab.transform.rotation);
+                Instantiate(powerUpPrefab, new Vector3(2,1,0), powerUpPrefab.transform.rotation);
+                Instantiate(medkitPrefab, new Vector3(-2,1,0), medkitPrefab.transform.rotation);
+                Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
                 waveBreak = false;
                 itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<TestScript>().Length;
             }
