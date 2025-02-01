@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
 
     private int healthPoints = 100;
+    private int maxHealthPoints = 100;
     public TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
@@ -90,15 +91,21 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
             healthPoints -= 10;
-            playerHpText.text = "Player HP: " + healthPoints + " / 100";
+            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Medkit")){
             healthPoints += 30;
-            if(healthPoints > 100){
-                healthPoints = 100;
+            if(healthPoints > maxHealthPoints){
+                healthPoints = maxHealthPoints;
             }
-            playerHpText.text = "Player HP: " + healthPoints + " / 100";
+            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Health Power Up")){
+            maxHealthPoints += 50;
+            healthPoints += 50;
+            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){
