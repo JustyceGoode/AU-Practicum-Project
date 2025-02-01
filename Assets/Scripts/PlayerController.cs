@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private int healthPoints = 100;
-    private int maxHealthPoints = 100;
+    private int healthPoints = 50;
+    private int maxHealthPoints = 50;
     public TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
@@ -32,12 +32,16 @@ public class PlayerController : MonoBehaviour
     public AudioClip shootSound;
     private AudioSource playerAudio;
 
+    public TextMeshProUGUI gameOverText;
+    public static bool isGameActive;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
-        playerHpText.text = "Player HP: " + healthPoints + " / 100";
+        playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        isGameActive = true;
     }
 
     // Update is called once per frame
@@ -84,7 +88,8 @@ public class PlayerController : MonoBehaviour
         }
 
         if(healthPoints <= 0){
-            Debug.Log("Game over!");
+            GameOver();
+            isGameActive = false;
         }
     }
 
@@ -111,5 +116,9 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Item")){
             Destroy(other.gameObject);
         }
+    }
+    
+    public void GameOver(){
+        gameOverText.gameObject.SetActive(true);
     }
 }
