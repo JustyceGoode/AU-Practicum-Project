@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -18,10 +21,14 @@ public class WaveManager : MonoBehaviour
 
     private bool waveBreak = true;
 
+    public TextMeshProUGUI gameOverText;
+    public Button restartButton;
+    public static bool isGameActive;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        isGameActive = true;
     }
 
     // Update is called once per frame
@@ -47,6 +54,10 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        if(PlayerController.healthPoints <= 0){
+            GameOver();
+            isGameActive = false;
+        }
     }
 
     private Vector3 GeneratePortalSpawnPosition(){
@@ -58,5 +69,14 @@ public class WaveManager : MonoBehaviour
         int enemyXPoint = Random.Range(-6,6);
         int enemyZPoint = Random.Range(-4,4);
         return new Vector3(enemyXPoint,1,enemyZPoint);
+    }
+
+    public void GameOver(){
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

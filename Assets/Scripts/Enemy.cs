@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
         enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
 
-        if(PlayerController.isGameActive){
+        if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
                 Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
