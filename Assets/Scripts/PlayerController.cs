@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,8 +22,9 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private int healthPoints = 50;
-    private int maxHealthPoints = 50;
+    public static int baseHealthPoints = 50;
+    public static int healthPoints;
+    public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
@@ -34,17 +33,14 @@ public class PlayerController : MonoBehaviour
     public AudioClip shootSound;
     private AudioSource playerAudio;
 
-    public TextMeshProUGUI gameOverText;
-    public Button restartButton;
-    public static bool isGameActive;
-
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
+        healthPoints = baseHealthPoints;
+        maxHealthPoints = baseHealthPoints;
         playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
-        isGameActive = true;
     }
 
     // Update is called once per frame
@@ -70,7 +66,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        if(isGameActive){
+        if(WaveManager.isGameActive){
             playerRb.AddForce(Vector3.forward * speed * verticalInput);
             playerRb.AddForce(Vector3.right * speed * horizontalInput);
         }
@@ -86,15 +82,10 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        if(Input.GetMouseButtonDown(0) && Time.time > canFire && isGameActive){
+        if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive){
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
-        }
-
-        if(healthPoints <= 0){
-            GameOver();
-            isGameActive = false;
         }
     }
 
@@ -121,14 +112,5 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Item")){
             Destroy(other.gameObject);
         }
-    }
-    
-    public void GameOver(){
-        gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-    }
-
-    public void RestartGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

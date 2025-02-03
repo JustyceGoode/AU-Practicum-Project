@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerController.isGameActive){
+        if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 5f){
                 Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
