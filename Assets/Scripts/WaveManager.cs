@@ -29,6 +29,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         isGameActive = true;
+        
     }
 
     // Update is called once per frame
