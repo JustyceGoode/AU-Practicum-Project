@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
 
     public TextMeshProUGUI gameOverText;
+    public Button restartButton;
     public static bool isGameActive;
 
     // Start is called before the first frame update
@@ -67,8 +70,10 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        playerRb.AddForce(Vector3.forward * speed * verticalInput);
-        playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        if(isGameActive){
+            playerRb.AddForce(Vector3.forward * speed * verticalInput);
+            playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        }
 
         playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
@@ -81,7 +86,7 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        if(Input.GetMouseButtonDown(0) && Time.time > canFire){
+        if(Input.GetMouseButtonDown(0) && Time.time > canFire && isGameActive){
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
@@ -120,5 +125,10 @@ public class PlayerController : MonoBehaviour
     
     public void GameOver(){
         gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
