@@ -900,8 +900,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7454578394929304622, guid: 4a66066fbbb882146af18083eccf82ea, type: 3}
   playerHpText: {fileID: 2057035470}
   shootSound: {fileID: 8300000, guid: b69b777791729bc479ff6bc7bff5e548, type: 3}
-  gameOverText: {fileID: 105622064}
-  restartButton: {fileID: 1808329710}
 --- !u!82 &1090831597
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1156,6 +1154,8 @@ MonoBehaviour:
   - {x: -5, y: 1, z: 3}
   - {x: 5, y: 1, z: -3}
   - {x: -5, y: 1, z: -3}
+  gameOverText: {fileID: 105622064}
+  restartButton: {fileID: 1808329710}
 --- !u!1 &1808329708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,8 +1239,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090831596}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1219070253}
+        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
