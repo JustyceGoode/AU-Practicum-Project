@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private int healthPoints = 100;
-    private int maxHealthPoints = 100;
+    public static int baseHealthPoints = 50;
+    public static int healthPoints;
+    public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
@@ -37,7 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
-        playerHpText.text = "Player HP: " + healthPoints + " / 100";
+        healthPoints = baseHealthPoints;
+        maxHealthPoints = baseHealthPoints;
+        playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
     }
 
     // Update is called once per frame
@@ -63,8 +66,10 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        playerRb.AddForce(Vector3.forward * speed * verticalInput);
-        playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        if(WaveManager.isGameActive){
+            playerRb.AddForce(Vector3.forward * speed * verticalInput);
+            playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        }
 
         playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
@@ -77,14 +82,10 @@ public class PlayerController : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
-        if(Input.GetMouseButtonDown(0) && Time.time > canFire){
+        if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive){
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
-        }
-
-        if(healthPoints <= 0){
-            Debug.Log("Game over!");
         }
     }
 
