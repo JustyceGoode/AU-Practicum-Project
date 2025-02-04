@@ -22,6 +22,9 @@ public class WaveManager : MonoBehaviour
     private int waveCounter;
     public TextMeshProUGUI waveCounterText;
 
+    public static int score;
+    public TextMeshProUGUI scoreText;
+
     public int itemCount;
     private bool waveBreak = true;
 
@@ -35,6 +38,8 @@ public class WaveManager : MonoBehaviour
         isGameActive = true;
         waveCounter = 1;
         waveCounterText.text = "Wave " + waveCounter;
+        score = 0;
+        scoreText.text = "Score: " + score;
     }
 
     // Update is called once per frame
@@ -43,6 +48,8 @@ public class WaveManager : MonoBehaviour
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<EnemySpawner>().Length;
         itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
+
+        scoreText.text = "Score: " + score; //Update score
 
         if(enemyCount == 0 && portalCount == 0){
             if(waveBreak){
