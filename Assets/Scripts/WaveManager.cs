@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
         new Vector3(-5,1,-3),
     };
 
+    public int itemCount;
     private bool waveBreak = true;
 
     public TextMeshProUGUI gameOverText;
@@ -29,7 +30,6 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         isGameActive = true;
-        
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class WaveManager : MonoBehaviour
     {
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<EnemySpawner>().Length;
-        int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<TestScript>().Length;
+        itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
 
         if(enemyCount == 0 && portalCount == 0){
             if(waveBreak){
@@ -45,13 +45,18 @@ public class WaveManager : MonoBehaviour
                 Instantiate(medkitPrefab, new Vector3(-2,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
                 waveBreak = false;
-                itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<TestScript>().Length;
+                itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length; //+ FindObjectsOfType<TestScript>().Length;
             }
-            if(itemCount <= 0){
+
+            //Start next wave after items are picked. For now, I'm allowing the player to ignore the medkit for 2 power ups (make medkit stronger than health up).
+            if(itemCount <= 1){
                 Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
                 Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
                 Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
                 waveBreak = true;
+                GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+                foreach(GameObject item in items)
+                    Destroy(item);
             }
         }
 
