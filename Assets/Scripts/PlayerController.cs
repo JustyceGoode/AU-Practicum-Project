@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    public static int baseHealthPoints = 50;
+    public static int baseHealthPoints = 100;
     public static int healthPoints;
     public static int maxHealthPoints;
-    public TextMeshProUGUI playerHpText;
+    public static TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
     private float canFire = 0f;
