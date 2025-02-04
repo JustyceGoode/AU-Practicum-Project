@@ -19,6 +19,9 @@ public class WaveManager : MonoBehaviour
         new Vector3(-5,1,-3),
     };
 
+    private int waveCounter;
+    public TextMeshProUGUI waveCounterText;
+
     public int itemCount;
     private bool waveBreak = true;
 
@@ -30,6 +33,8 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         isGameActive = true;
+        waveCounter = 1;
+        waveCounterText.text = "Wave " + waveCounter;
     }
 
     // Update is called once per frame
@@ -57,6 +62,8 @@ public class WaveManager : MonoBehaviour
                 GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
                 foreach(GameObject item in items)
                     Destroy(item);
+                waveCounter += 1;
+                waveCounterText.text = "Wave " + waveCounter;
             }
         }
 
