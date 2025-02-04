@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    public static int baseHealthPoints = 100;
+    private int baseHealthPoints = 100;
     public static int healthPoints;
     public static int maxHealthPoints;
-    public static TextMeshProUGUI playerHpText;
+    public TextMeshProUGUI playerHpText;
     public static int attackDamage = 10;
     private float fireRate = 0.4f;
     private float canFire = 0f;
@@ -87,26 +87,29 @@ public class PlayerController : MonoBehaviour
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
         }
+
+        //Update player HP text
+        playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
     }
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
             healthPoints -= 10;
-            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+            //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
-        if(other.gameObject.CompareTag("Medkit")){
-            healthPoints += 30;
-            if(healthPoints > maxHealthPoints){
-                healthPoints = maxHealthPoints;
-            }
-            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
-            Destroy(other.gameObject);
-        }
+        // if(other.gameObject.CompareTag("Medkit")){
+        //     healthPoints += 30;
+        //     if(healthPoints > maxHealthPoints){
+        //         healthPoints = maxHealthPoints;
+        //     }
+        //     //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        //     Destroy(other.gameObject);
+        // }
         if(other.gameObject.CompareTag("Health Power Up")){
             maxHealthPoints += 50;
             healthPoints += 50;
-            playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+            //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){

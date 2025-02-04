@@ -37,7 +37,7 @@ public class WaveManager : MonoBehaviour
     {
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<EnemySpawner>().Length;
-        int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<TestScript>().Length;
+        int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
 
         if(enemyCount == 0 && portalCount == 0){
             if(waveBreak){
