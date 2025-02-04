@@ -17,14 +17,13 @@ public class Item : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(){
-        // if(itemId == 0){
-        //     PlayerController.healthPoints += 30;
-        //     if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
-        //         PlayerController.healthPoints = PlayerController.maxHealthPoints;
-        //     }
-        //     PlayerController.playerHpText.text = "Player HP: " + PlayerController.healthPoints + " / " + PlayerController.maxHealthPoints;
-        //     Destroy(gameObject);
-        // }
+    private void OnTriggerEnter(Collider other){
+        if(itemId == 0){
+            PlayerController.healthPoints += 30;
+            if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
+                PlayerController.healthPoints = PlayerController.maxHealthPoints;
+            }
+            Destroy(gameObject);
+        }
     }
 }
