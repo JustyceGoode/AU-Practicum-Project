@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     public GameObject playerGun;
 
     //Input Variables
-    public float horizontalInput;
-    public float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
     
     private Rigidbody playerRb;
     private float speed = 20.0f;

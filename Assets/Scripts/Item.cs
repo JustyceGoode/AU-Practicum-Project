@@ -18,17 +18,23 @@ public class Item : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other){
+        //Medkit
         if(itemId == 0){
             PlayerController.healthPoints += 30;
             if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
                 PlayerController.healthPoints = PlayerController.maxHealthPoints;
             }
-            //Destroy(gameObject);
         }
+
+        //Item to increase health
         if(itemId == 1){
-            PlayerController.maxHealthPoints += 50;
-            PlayerController.healthPoints += 50;
-            //Destroy(gameObject);
+            PlayerController.maxHealthPoints += 20;
+            PlayerController.healthPoints += 20;
+        }
+
+        //Item to increase damage
+        if(itemId == 2){
+            PlayerController.attackDamage += 5;
         }
     }
 }
