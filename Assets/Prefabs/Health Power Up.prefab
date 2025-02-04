@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 2820658391539684820}
   - component: {fileID: 1976196045291690813}
   - component: {fileID: 3958182728871093508}
+  - component: {fileID: 3881335924586736964}
   m_Layer: 0
   m_Name: Health Power Up
-  m_TagString: Health Power Up
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,10 +114,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600991940241909673}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32af7412c7b22b2449fcdfdc916ae715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mousePosition: {x: 0, y: 0, z: 0}
   mousePositionInitial: {x: 0, y: 0, z: 0}
+--- !u!114 &3881335924586736964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600991940241909673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651354342958f8c49942332f615888ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1
