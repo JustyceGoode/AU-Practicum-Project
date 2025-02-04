@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour
             GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
             Destroy(explosionEffect, 2.0f);
             Destroy(gameObject);
+            WaveManager.score += 10;
         }
     }
 
