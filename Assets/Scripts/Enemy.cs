@@ -79,11 +79,6 @@ public class Enemy : MonoBehaviour
                 timePassed = 0f;
             }
         }
-        // timePassed += Time.deltaTime;
-        // if(timePassed > 2f){
-        //     Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
-        //     timePassed = 0f;
-        // }
         
         //To update the damage from the power up
         playerAttackDamage = PlayerController.attackDamage; 
