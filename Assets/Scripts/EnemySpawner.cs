@@ -29,11 +29,6 @@ public class EnemySpawner : MonoBehaviour
                 timePassed = 0f;
             }
         }
-        // timePassed += Time.deltaTime;
-        // if(timePassed > 5f){
-        //     Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
-        //     timePassed = 0f;
-        // }
 
         playerAttackDamage = PlayerController.attackDamage;
 

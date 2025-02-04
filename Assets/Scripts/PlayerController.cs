@@ -98,20 +98,6 @@ public class PlayerController : MonoBehaviour
             //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
-        // if(other.gameObject.CompareTag("Medkit")){
-        //     healthPoints += 30;
-        //     if(healthPoints > maxHealthPoints){
-        //         healthPoints = maxHealthPoints;
-        //     }
-        //     //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
-        //     Destroy(other.gameObject);
-        // }
-        // if(other.gameObject.CompareTag("Health Power Up")){
-        //     maxHealthPoints += 50;
-        //     healthPoints += 50;
-        //     //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
-        //     Destroy(other.gameObject);
-        // }
         if(other.gameObject.CompareTag("Item")){
             Destroy(other.gameObject);
         }
