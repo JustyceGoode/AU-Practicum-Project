@@ -71,6 +71,7 @@ public class Enemy : MonoBehaviour
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
         enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
 
+        //Shoot bullets while the game is active
         if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
@@ -84,6 +85,7 @@ public class Enemy : MonoBehaviour
         //     timePassed = 0f;
         // }
 
+        //When the enemy is destroy
         if(healthPoints <= 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
             GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);

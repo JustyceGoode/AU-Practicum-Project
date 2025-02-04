@@ -23,7 +23,12 @@ public class Item : MonoBehaviour
             if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
                 PlayerController.healthPoints = PlayerController.maxHealthPoints;
             }
-            Destroy(gameObject);
+            //Destroy(gameObject);
+        }
+        if(itemId == 1){
+            PlayerController.maxHealthPoints += 50;
+            PlayerController.healthPoints += 50;
+            //Destroy(gameObject);
         }
     }
 }

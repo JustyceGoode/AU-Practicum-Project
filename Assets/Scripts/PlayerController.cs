@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
-    private int baseHealthPoints = 100;
+    private static int baseHealthPoints = 100; //Keep this as static so that it can be assigned to HP & maxHP
     public static int healthPoints;
     public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
@@ -106,12 +106,12 @@ public class PlayerController : MonoBehaviour
         //     //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
         //     Destroy(other.gameObject);
         // }
-        if(other.gameObject.CompareTag("Health Power Up")){
-            maxHealthPoints += 50;
-            healthPoints += 50;
-            //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
-            Destroy(other.gameObject);
-        }
+        // if(other.gameObject.CompareTag("Health Power Up")){
+        //     maxHealthPoints += 50;
+        //     healthPoints += 50;
+        //     //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        //     Destroy(other.gameObject);
+        // }
         if(other.gameObject.CompareTag("Item")){
             Destroy(other.gameObject);
         }
