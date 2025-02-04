@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     private int healthPoints = 30;
-    public int playerAttackDamage = PlayerController.attackDamage;
+    public int playerAttackDamage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
@@ -84,6 +84,8 @@ public class Enemy : MonoBehaviour
         //     Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
         //     timePassed = 0f;
         // }
+        
+        playerAttackDamage = PlayerController.attackDamage;
 
         //When the enemy is destroy
         if(healthPoints <= 0){
