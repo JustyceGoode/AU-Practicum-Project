@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     private float timePassed = 0f;
 
     private int healthPoints = 50;
-    public int playerAttackDamage = PlayerController.attackDamage;
+    public int playerAttackDamage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
@@ -34,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
         //     Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
         //     timePassed = 0f;
         // }
+
+        playerAttackDamage = PlayerController.attackDamage;
 
         if(healthPoints < 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
