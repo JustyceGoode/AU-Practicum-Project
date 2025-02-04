@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     private int healthPoints = 30;
-    public int playerAttackDamage;
+    public int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
@@ -85,7 +85,8 @@ public class Enemy : MonoBehaviour
         //     timePassed = 0f;
         // }
         
-        playerAttackDamage = PlayerController.attackDamage;
+        //To update the damage from the power up
+        playerAttackDamage = PlayerController.attackDamage; 
 
         //When the enemy is destroy
         if(healthPoints <= 0){
