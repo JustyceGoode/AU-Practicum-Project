@@ -32,10 +32,14 @@ public class WaveManager : MonoBehaviour
     public Button restartButton;
     public static bool isGameActive;
 
+    public TextMeshProUGUI pauseText;
+    public Button continueButton;
+
     // Start is called before the first frame update
     void Start()
     {
         isGameActive = true;
+        //Time.timeScale = 1;
         waveCounter = 1;
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
@@ -77,6 +81,11 @@ public class WaveManager : MonoBehaviour
         if(PlayerController.healthPoints <= 0){
             GameOver();
             isGameActive = false;
+            //Time.timeScale = 0;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            PauseGame();
         }
     }
 
@@ -97,6 +106,19 @@ public class WaveManager : MonoBehaviour
     }
 
     public void RestartGame(){
+        //Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void PauseGame(){
+        pauseText.gameObject.SetActive(true);
+        continueButton.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ContinueGame(){
+        pauseText.gameObject.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }
