@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class Portal : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    //public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     private float timePassed = 0f;
 
-    private int healthPoints = 50;
+    private int healthPoints = 65;
     public int playerAttackDamage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
 
+    //private static float baseStrongEnemyChance = 0.0f;
+    //public static float strongEnemyChance;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //strongEnemyChance = baseStrongEnemyChance;
     }
 
     // Update is called once per frame
@@ -25,7 +29,9 @@ public class EnemySpawner : MonoBehaviour
         if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 5f){
-                Instantiate(enemyPrefab, transform.position + new Vector3(0,1f,0), enemyPrefab.transform.rotation);
+                //Debug.Log("Strong Enemy Chance: " + WaveManager.strongEnemyChance);
+                int enemyIndex = DiceRoller(WaveManager.strongEnemyChance);
+                Instantiate(enemyPrefabs[enemyIndex], transform.position + new Vector3(0,1f,0), enemyPrefabs[enemyIndex].transform.rotation);
                 timePassed = 0f;
             }
         }
@@ -44,6 +50,16 @@ public class EnemySpawner : MonoBehaviour
         if(other.gameObject.CompareTag("Player")){
             healthPoints -= playerAttackDamage;
             Destroy(other.gameObject);
+        }
+    }
+
+    private int DiceRoller(float strongChance){
+        float temp = Random.Range(1,10);
+        if(temp < strongChance * 10){
+            return 1;
+        }
+        else{
+            return 0;
         }
     }
 }
