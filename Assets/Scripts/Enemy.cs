@@ -20,8 +20,9 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
     private float timePassed = 0f;
 
-    private int healthPoints = 30;
-    public int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
+    public int healthPoints;
+    public int damagePoints;
+    private int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
