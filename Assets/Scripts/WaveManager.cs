@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
     public GameObject portalPrefab;
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
@@ -21,6 +21,7 @@ public class WaveManager : MonoBehaviour
 
     private int waveCounter;
     public TextMeshProUGUI waveCounterText;
+    public static float strongEnemyChance;
 
     public static int score;
     public TextMeshProUGUI scoreText;
@@ -44,13 +45,14 @@ public class WaveManager : MonoBehaviour
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
         scoreText.text = "Score: " + score;
+        strongEnemyChance = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         int enemyCount = FindObjectsOfType<Enemy>().Length;
-        int portalCount = FindObjectsOfType<EnemySpawner>().Length;
+        int portalCount = FindObjectsOfType<Portal>().Length;
         itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
 
         scoreText.text = "Score: " + score; //Update score
@@ -61,14 +63,17 @@ public class WaveManager : MonoBehaviour
                 Instantiate(medkitPrefab, new Vector3(-2,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
                 waveBreak = false;
-                itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length; //+ FindObjectsOfType<TestScript>().Length;
+                itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
             }
 
             //Start next wave after items are picked. For now, I'm allowing the player to ignore the medkit for 2 power ups (make medkit stronger than health up).
             if(itemCount <= 1){
                 Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
-                Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
-                Instantiate(enemyPrefab, GenerateEnemySpawnPosition(), enemyPrefab.transform.rotation);
+                strongEnemyChance += 0.2f;
+                int enemyIndex = DiceRoller(strongEnemyChance);
+                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+                enemyIndex = DiceRoller(strongEnemyChance);
+                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
                 waveBreak = true;
                 GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
                 foreach(GameObject item in items)
@@ -120,5 +125,15 @@ public class WaveManager : MonoBehaviour
         pauseText.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    private int DiceRoller(float strongChance){
+        float temp = Random.Range(1,10);
+        if(temp < strongChance * 10){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 }

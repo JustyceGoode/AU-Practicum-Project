@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public static int healthPoints;
     public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
-    public static int attackDamage = 10;
+    private static int baseAttackDamage = 10;
+    public static int attackDamage;
     private float fireRate = 0.4f;
     private float canFire = 0f;
 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         healthPoints = baseHealthPoints;
         maxHealthPoints = baseHealthPoints;
+        attackDamage = baseAttackDamage;
         playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
     }
 
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
+            Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
