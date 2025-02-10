@@ -5,14 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Get Enemy parts
-    //public GameObject enemyWheel;
     public GameObject enemyGun;
 
     private float speed = 10.0f;
     private Rigidbody enemyRb;
     public GameObject player;
 
-    private float dist;
+    //private float dist;
 
     private int xBoundary = 7;
     private int zBoundary = 5;
@@ -21,29 +20,38 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     public int healthPoints;
-    public int damagePoints;
-    private int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
+    public int EnemyId;
+    public static int damage;
+    public static int scorePoints;
+    //private int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
-    //private AudioSource enemyAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
-        //enemyAudio = GetComponent<AudioSource>();
+
+        //EnemyId is a public, non-static variable, so it can be modified in the Unity interface but can't be used to modify variables in other programs.
+        //A non-static variable has to be assigned to a static variable in the start function.
+        damage = EnemyId * 5 + 10;
+        scorePoints = EnemyId * 10 + 10;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Direction for the enemy to follow the player
         Vector3 followDirection = (player.transform.position - transform.position).normalized;
+
+        //Direction for the enemy to aim at the player
         Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(enemyGun.transform.position.x, enemyGun.transform.position.z);
         lookDirection = lookDirection.normalized;
 
-        dist = Vector3.Distance(transform.position, player.transform.position);
+        //Have the enemy follow the player at a distance
+        float dist = Vector3.Distance(transform.position, player.transform.position);
 
         if(dist > 3.25f){
             enemyRb.AddForce(followDirection * speed);
@@ -82,7 +90,7 @@ public class Enemy : MonoBehaviour
         }
         
         //To update the damage from the power up
-        playerAttackDamage = PlayerController.attackDamage; 
+        //playerAttackDamage = PlayerController.attackDamage; 
 
         //When the enemy is destroy
         if(healthPoints <= 0){
@@ -90,13 +98,14 @@ public class Enemy : MonoBehaviour
             GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
             Destroy(explosionEffect, 2.0f);
             Destroy(gameObject);
-            WaveManager.score += 10;
+            WaveManager.score += scorePoints;
         }
     }
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            healthPoints -= playerAttackDamage;
+            //healthPoints -= playerAttackDamage;
+            healthPoints -= PlayerController.attackDamage;
             Destroy(other.gameObject);
         }
     }

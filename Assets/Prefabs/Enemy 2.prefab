@@ -151,7 +151,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bulletPrefab: {fileID: 7454578394929304622, guid: 7f46f3958e4a2d243bbc8f0e58ebcbd2, type: 3}
   healthPoints: 55
-  damagePoints: 15
+  EnemyId: 1
   explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
   explosionSound: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
 --- !u!1 &7571950955398886274
