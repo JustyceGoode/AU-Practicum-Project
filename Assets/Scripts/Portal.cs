@@ -9,7 +9,7 @@ public class Portal : MonoBehaviour
     private float timePassed = 0f;
 
     private int healthPoints = 65;
-    public int playerAttackDamage;
+    //public int playerAttackDamage;
 
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
@@ -36,7 +36,7 @@ public class Portal : MonoBehaviour
             }
         }
 
-        playerAttackDamage = PlayerController.attackDamage;
+        //playerAttackDamage = PlayerController.attackDamage;
 
         if(healthPoints < 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
@@ -48,7 +48,8 @@ public class Portal : MonoBehaviour
 
         private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            healthPoints -= playerAttackDamage;
+            //healthPoints -= playerAttackDamage;
+            healthPoints -= PlayerController.attackDamage;
             Destroy(other.gameObject);
         }
     }

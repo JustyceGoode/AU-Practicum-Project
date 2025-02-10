@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public static int healthPoints;
     public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
-    private static int baseAttackDamage = 10;
+    private int baseAttackDamage = 10;
     public static int attackDamage;
     private float fireRate = 0.4f;
     private float canFire = 0f;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
-            healthPoints -= 10;
+            healthPoints -= Enemy.damage;
             //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
