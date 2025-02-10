@@ -7,11 +7,14 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
+    //Prefabs
     public GameObject portalPrefab;
     public GameObject[] enemyPrefabs;
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
+
+    //Portal spawn locations
     public Vector3[] portalSpawnPoints = {
         new Vector3(5,1,3),
         new Vector3(-5,1,3),
@@ -21,18 +24,21 @@ public class WaveManager : MonoBehaviour
 
     private int waveCounter;
     public TextMeshProUGUI waveCounterText;
-    public static float strongEnemyChance;
+    public static float strongEnemyChance; //Probabilty for stronger enemies to spawn
 
+    //Score tracking variables
     public static int score;
     public TextMeshProUGUI scoreText;
 
-    public int itemCount;
+    //private int itemCount;
     private bool waveBreak = true;
 
+    //Game over variables
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public static bool isGameActive;
 
+    //Pause button variables
     public TextMeshProUGUI pauseText;
     public Button continueButton;
 
@@ -51,22 +57,29 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Variables to keep track of objects on the playing field.
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<Portal>().Length;
-        itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
+        //int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
+        int itemCount = FindObjectsOfType<Item>().Length;
 
-        scoreText.text = "Score: " + score; //Update score
+        //Update score
+        scoreText.text = "Score: " + score;
 
+        //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
+
+            //Generate items before the next wave starts
             if(waveBreak){
                 Instantiate(powerUpPrefab, new Vector3(2,1,0), powerUpPrefab.transform.rotation);
                 Instantiate(medkitPrefab, new Vector3(-2,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
+                //itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
+                itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
-                itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
             }
 
-            //Start next wave after items are picked. For now, I'm allowing the player to ignore the medkit for 2 power ups (make medkit stronger than health up).
+            //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
             if(itemCount <= 1){
                 Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
                 strongEnemyChance += 0.2f;

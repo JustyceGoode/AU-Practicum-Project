@@ -38,6 +38,7 @@ public class Portal : MonoBehaviour
 
         //playerAttackDamage = PlayerController.attackDamage;
 
+        //Whent the portal is destroyed.
         if(healthPoints < 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
             GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);

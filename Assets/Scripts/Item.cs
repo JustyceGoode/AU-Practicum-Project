@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         //Medkit
+        //TODO: Balance medkits to make them viable compared to health up items.
         if(itemId == 0){
             PlayerController.healthPoints += 30;
             if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
