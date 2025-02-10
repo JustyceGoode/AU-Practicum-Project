@@ -7,24 +7,26 @@ public class Enemy : MonoBehaviour
     //Get Enemy parts
     public GameObject enemyGun;
 
+    //Enemy movement variables
     private float speed = 10.0f;
     private Rigidbody enemyRb;
     public GameObject player;
-
-    //private float dist;
-
     private int xBoundary = 7;
     private int zBoundary = 5;
 
+    //Enemy bullets
     public GameObject bulletPrefab;
     private float timePassed = 0f;
 
+    //Enemy stats
+    //TODO Balance enemy stats
     public int healthPoints;
     public int EnemyId;
     public static int damage;
     public static int scorePoints;
     //private int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
 
+    //Explosion particle variables
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
 
@@ -92,7 +94,7 @@ public class Enemy : MonoBehaviour
         //To update the damage from the power up
         //playerAttackDamage = PlayerController.attackDamage; 
 
-        //When the enemy is destroy
+        //When the enemy is destroyed
         if(healthPoints <= 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
             GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
