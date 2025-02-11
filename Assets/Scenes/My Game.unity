@@ -1561,7 +1561,6 @@ MonoBehaviour:
   - {x: -5, y: 1, z: -3}
   waveCounterText: {fileID: 694800100}
   scoreText: {fileID: 1489224473}
-  itemCount: 0
   gameOverText: {fileID: 105622064}
   restartButton: {fileID: 1808329710}
   pauseText: {fileID: 1284019132}
