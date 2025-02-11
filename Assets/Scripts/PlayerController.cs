@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         playerGun.transform.eulerAngles = new Vector3 (0, -mouseAngle, 90);
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
-            Debug.Log("Player Attack: " + attackDamage);
+            //Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, playerGun.transform.position, playerGun.transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
