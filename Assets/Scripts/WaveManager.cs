@@ -126,6 +126,7 @@ public class WaveManager : MonoBehaviour
     public void RestartGame(){
         //Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene("Title Menu");
     }
 
     public void PauseGame(){
