@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerRb;
-    private float speed = 20.0f;
+    public float speed = 20.0f;
 
     //World Boundary
     private int xBoundary = 7;
@@ -69,8 +69,12 @@ public class PlayerController : MonoBehaviour
         }
 
         if(WaveManager.isGameActive){
-            playerRb.AddForce(Vector3.forward * speed * verticalInput);
-            playerRb.AddForce(Vector3.right * speed * horizontalInput);
+            // playerRb.AddForce(Vector3.forward * speed * verticalInput);
+            // playerRb.AddForce(Vector3.right * speed * horizontalInput);
+
+            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
+
+            playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
         }
 
         playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
