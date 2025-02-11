@@ -33,14 +33,13 @@ public class WaveManager : MonoBehaviour
     //private int itemCount;
     private bool waveBreak = true;
 
-    //Game over variables
+    //UI variables
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public static bool isGameActive;
-
-    //Pause button variables
     public TextMeshProUGUI pauseText;
     public Button continueButton;
+    public Button backToTitleButton;
 
     // Start is called before the first frame update
     void Start()
@@ -121,6 +120,7 @@ public class WaveManager : MonoBehaviour
     public void GameOver(){
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
+        backToTitleButton.gameObject.SetActive(true);
     }
 
     public void RestartGame(){
@@ -131,13 +131,20 @@ public class WaveManager : MonoBehaviour
     public void PauseGame(){
         pauseText.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
+        backToTitleButton.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
+    //Continue Game after pausing
     public void ContinueGame(){
         pauseText.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
+        backToTitleButton.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void BackToTitle(){
+        SceneManager.LoadScene("Title Menu");
     }
 
     private int DiceRoller(float strongChance){
