@@ -19,5 +19,6 @@ public class TitleMenuManager : MonoBehaviour
 
     public void StartGame(){
         SceneManager.LoadScene("My Game");
+        Time.timeScale = 1;
     }
 }
