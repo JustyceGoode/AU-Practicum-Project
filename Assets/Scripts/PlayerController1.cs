@@ -15,11 +15,11 @@ public class PlayerController1 : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerRb;
-    public float speed = 10.0f;
+    private float speed = 2.0f;
 
     //World Boundary
-    private int xBoundary = 7;
-    private int zBoundary = 5;
+    private int xBoundary = 15;
+    private int zBoundary = 8;
 
     //Bullets
     public GameObject bulletPrefab;
@@ -36,6 +36,8 @@ public class PlayerController1 : MonoBehaviour
     public AudioClip shootSound;
     private AudioSource playerAudio;
 
+    //public float mouseAngle; //Temporary global declaration
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,7 @@ public class PlayerController1 : MonoBehaviour
         maxHealthPoints = baseHealthPoints;
         attackDamage = baseAttackDamage;
         playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        //mouseAngle = 0f;
     }
 
     // Update is called once per frame
@@ -71,21 +74,30 @@ public class PlayerController1 : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        if(WaveManager.isGameActive){
-            // playerRb.AddForce(Vector3.forward * speed * verticalInput);
-            // playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        // if(WaveManager.isGameActive){
+        //     // playerRb.AddForce(Vector3.forward * speed * verticalInput);
+        //     // playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
-            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
-            //playerAnimator.setFloat("forwardMovement", movement.z);
-            if(movement.z > 0f){
-                playerAnimator.SetBool("isMovingForward", true);
-            }
-            else{
-                playerAnimator.SetBool("isMovingForward", false);
-            }
+        //     Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
+        //     //playerAnimator.setFloat("forwardMovement", movement.z);
+        //     // if(movement.z > 0f){
+        //     //     playerAnimator.SetBool("isMovingForward", true);
+        //     // }
+        //     // else{
+        //     //     playerAnimator.SetBool("isMovingForward", false);
+        //     // }
 
-            playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
-        }
+        //     if((mouseAngle > 0 && mouseAngle < 45) || (mouseAngle < 0 && mouseAngle > -45)){
+        //         if(movement.z > 0f){
+        //             playerAnimator.SetBool("isMovingForward", true);
+        //         }
+        //     }
+        //     else{
+        //         playerAnimator.SetBool("isMovingForward", false);
+        //     }
+
+        //     playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
+        // }
 
         //playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
@@ -96,13 +108,183 @@ public class PlayerController1 : MonoBehaviour
 
         Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
+        //Debug.Log("Mouse Angle: " + mouseAngle);
         transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
-            //Debug.Log("Player Attack: " + attackDamage);
+            Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             playerAudio.PlayOneShot(shootSound, 0.4f);
+        }
+
+        //Player can move while game is active
+        if(WaveManager.isGameActive){
+            // playerRb.AddForce(Vector3.forward * speed * verticalInput);
+            // playerRb.AddForce(Vector3.right * speed * horizontalInput);
+
+            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
+            //playerAnimator.setFloat("forwardMovement", movement.z);
+            // if(movement.z > 0f){
+            //     playerAnimator.SetBool("isMovingForward", true);
+            // }
+            // else{
+            //     playerAnimator.SetBool("isMovingForward", false);
+            // }
+
+            if(movement.x != 0f || movement.z != 0f){
+                playerAnimator.SetBool("isMoving", true);
+                Debug.Log("Mouse Angle: " + mouseAngle);
+            }
+            else{
+                playerAnimator.SetBool("isMoving", false);
+            }
+
+            //If the player is looking right
+            if(mouseAngle > -45 && mouseAngle < 45){
+
+                //Play Forward Animation
+                if(movement.x > 0f){
+                    playerAnimator.SetBool("movingForward", true);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play Backward Animation
+                else if(movement.x < 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", true);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play Left Animation
+                else if(movement.z > 0f && movement.x == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", true);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play Right Animation
+                else if(movement.z < 0f && movement.x == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", true);
+                }
+            }
+
+            //If the player is looking left
+            if(mouseAngle < -135 || mouseAngle > 135){
+
+                //Play forward animation
+                if(movement.x < 0f){
+                    playerAnimator.SetBool("movingForward", true);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play backward animation
+                else if(movement.x > 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", true);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play left animation
+                else if(movement.z < 0f && movement.x == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", true);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play right animation
+                else if(movement.z > 0f && movement.x == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", true);
+                }
+            }
+
+            //If the player is looking up
+            if(mouseAngle > 45 && mouseAngle < 135){
+
+                //Play forward animation
+                if(movement.z > 0f){
+                    playerAnimator.SetBool("movingForward", true);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play backward animation
+                else if(movement.z < 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", true);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play left animation
+                else if(movement.x < 0f && movement.z == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", true);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play right animation
+                else if(movement.x > 0f && movement.z == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", true);
+                }
+            }
+
+            //If the player is looking down
+            if(mouseAngle < -45 && mouseAngle > -135){
+
+                //Play forward animation
+                if(movement.z < 0f){
+                    playerAnimator.SetBool("movingForward", true);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play backward animation
+                else if(movement.z > 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", true);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play left animation
+                else if(movement.x > 0f && movement.z == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", true);
+                    playerAnimator.SetBool("movingRight", false);
+                }
+
+                //Play right animation
+                else if(movement.x < 0f && movement.z == 0f){
+                    playerAnimator.SetBool("movingForward", false);
+                    playerAnimator.SetBool("movingBackward", false);
+                    playerAnimator.SetBool("movingLeft", false);
+                    playerAnimator.SetBool("movingRight", true);
+                }
+            }
+
+            playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
         }
 
         //Update player HP text

@@ -340,7 +340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053a1a4e5afb57b458e0f49a6872b3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   bulletPrefab: {fileID: 7454578394929304622, guid: 4a66066fbbb882146af18083eccf82ea, type: 3}
   playerHpText: {fileID: 2057035470}
   shootSound: {fileID: 8300000, guid: b69b777791729bc479ff6bc7bff5e548, type: 3}
@@ -493,7 +492,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -941,7 +940,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 12, z: 0}
+  m_LocalPosition: {x: 0, y: 17.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
