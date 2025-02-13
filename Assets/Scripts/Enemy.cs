@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
+        player = GameObject.Find("HPCharacter");
 
         //EnemyId is a public, non-static variable, so it can be modified in the Unity interface but can't be used to modify variables in other programs.
         //A non-static variable has to be assigned to a static variable in the start function.
@@ -81,12 +81,14 @@ public class Enemy : MonoBehaviour
 
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
         enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
+        float lookRadian = (lookAngle / 180) * (Mathf.PI);
 
         //Shoot bullets while the game is active
         if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
-                Instantiate(bulletPrefab, enemyGun.transform.position, enemyGun.transform.rotation);
+                Instantiate(bulletPrefab, enemyGun.transform.position + new Vector3(1.25f * Mathf.Cos(lookRadian), 0, 1.25f  *Mathf.Sin(lookRadian)), enemyGun.transform.rotation);
+                //Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
                 timePassed = 0f;
             }
         }
@@ -107,7 +109,8 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
             //healthPoints -= playerAttackDamage;
-            healthPoints -= PlayerController.attackDamage;
+            healthPoints -= PlayerController1.attackDamage;
+            //Debug.Log("Enemy HP: " + healthPoints);
             Destroy(other.gameObject);
         }
     }
