@@ -111,10 +111,12 @@ public class PlayerController1 : MonoBehaviour
         //Debug.Log("Mouse Angle: " + mouseAngle);
         transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
 
+        //TODO: Figure out how to generate bullets without colliding with the player's collider.
+
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
             Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Instantiate(bulletPrefab, transform.position + new Vector3(0,1,0), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             playerAudio.PlayOneShot(shootSound, 0.4f);
         }
 
