@@ -120,7 +120,7 @@ public class PlayerController1 : MonoBehaviour
         //TODO: Figure out how to generate bullets without colliding with the player's collider.
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
-            //Debug.Log("Player Attack: " + attackDamage);
+            Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
             //Instantiate(bulletPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             //playerPointer.transform.position = transform.position + new Vector3(2*Mathf.Cos(-mouseAngle), 1, 2*Mathf.Sin(-mouseAngle));
@@ -134,17 +134,11 @@ public class PlayerController1 : MonoBehaviour
             // playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
-            //playerAnimator.setFloat("forwardMovement", movement.z);
-            // if(movement.z > 0f){
-            //     playerAnimator.SetBool("isMovingForward", true);
-            // }
-            // else{
-            //     playerAnimator.SetBool("isMovingForward", false);
-            // }
 
+            //Check if the player is moving
             if(movement.x != 0f || movement.z != 0f){
                 playerAnimator.SetBool("isMoving", true);
-                Debug.Log("Mouse Angle: " + mouseAngle);
+                //Debug.Log("Mouse Angle: " + mouseAngle);
             }
             else{
                 playerAnimator.SetBool("isMoving", false);

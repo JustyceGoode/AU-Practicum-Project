@@ -50,7 +50,7 @@ public class Portal : MonoBehaviour
         private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
             //healthPoints -= playerAttackDamage;
-            healthPoints -= PlayerController.attackDamage;
+            healthPoints -= PlayerController1.attackDamage;
             Destroy(other.gameObject);
         }
     }

@@ -95,11 +95,11 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        // if(PlayerController.healthPoints <= 0){
-        //     GameOver();
-        //     isGameActive = false;
-        //     //Time.timeScale = 0;
-        // }
+        if(PlayerController1.healthPoints <= 0){
+            GameOver();
+            isGameActive = false;
+            //Time.timeScale = 0;
+        }
 
         if(Input.GetKeyDown(KeyCode.Escape)){
             PauseGame();
