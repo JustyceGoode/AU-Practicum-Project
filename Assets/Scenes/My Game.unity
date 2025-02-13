@@ -267,7 +267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7673487251499248760, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_Name
-      value: HPCharacter
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499544664, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1272,7 +1272,7 @@ GameObject:
   - component: {fileID: 1090831596}
   - component: {fileID: 1090831597}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Old Player Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3059,7 +3059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578869834338832737, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.06
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4578869834338832737, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3067,7 +3067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578869834338832737, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4578869834338832737, guid: 06ebf6a5864900b47af2fe0dad1ad886, type: 3}
       propertyPath: m_LocalRotation.w
