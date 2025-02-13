@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
     private float speed = 10.0f;
     private Rigidbody enemyRb;
     public GameObject player;
-    private int xBoundary = 7;
-    private int zBoundary = 5;
+    private int xBoundary = 15;
+    private int zBoundary = 8;
 
     //Enemy bullets
     public GameObject bulletPrefab;
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
-        player = GameObject.Find("HPCharacter");
+        player = GameObject.Find("Player");
 
         //EnemyId is a public, non-static variable, so it can be modified in the Unity interface but can't be used to modify variables in other programs.
         //A non-static variable has to be assigned to a static variable in the start function.
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
             //healthPoints -= playerAttackDamage;
-            healthPoints -= PlayerController1.attackDamage;
+            healthPoints -= PlayerController.attackDamage;
             //Debug.Log("Enemy HP: " + healthPoints);
             Destroy(other.gameObject);
         }

@@ -22,21 +22,21 @@ public class Item : MonoBehaviour
         //TODO: Balance medkits to make them viable compared to health up items.
         //TODO: There is a bug where the if the player heals over their max health, it doesn't revert down.
         if(itemId == 0){
-            PlayerController1.healthPoints += 30;
-            if(PlayerController1.healthPoints > PlayerController1.maxHealthPoints){
-                PlayerController1.healthPoints = PlayerController1.maxHealthPoints;
+            PlayerController.healthPoints += 30;
+            if(PlayerController.healthPoints > PlayerController.maxHealthPoints){
+                PlayerController.healthPoints = PlayerController.maxHealthPoints;
             }
         }
 
         //Item to increase health
         if(itemId == 1){
-            PlayerController1.maxHealthPoints += 20;
-            PlayerController1.healthPoints += 20;
+            PlayerController.maxHealthPoints += 20;
+            PlayerController.healthPoints += 20;
         }
 
         //Item to increase damage
         if(itemId == 2){
-            PlayerController1.attackDamage += 5;
+            PlayerController.attackDamage += 5;
         }
     }
 }
