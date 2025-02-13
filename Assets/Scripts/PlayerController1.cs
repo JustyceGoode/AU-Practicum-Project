@@ -7,6 +7,8 @@ public class PlayerController1 : MonoBehaviour
 {
     //Get components of the player
     //public GameObject playerGun;
+    public GameObject playerPointer;
+    private float pointerDistance = 1.6f;
 
     private Animator playerAnimator;
 
@@ -110,13 +112,19 @@ public class PlayerController1 : MonoBehaviour
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
         //Debug.Log("Mouse Angle: " + mouseAngle);
         transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
+        
+        float mouseRadian = (mouseAngle / 180) * (Mathf.PI);
+        //float pointerDistance = 2;
+        playerPointer.transform.position = transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian));
 
         //TODO: Figure out how to generate bullets without colliding with the player's collider.
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
-            Debug.Log("Player Attack: " + attackDamage);
+            //Debug.Log("Player Attack: " + attackDamage);
             canFire = Time.time + fireRate;
-            Instantiate(bulletPrefab, transform.position + new Vector3(0,1,0), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
+            //Instantiate(bulletPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
+            //playerPointer.transform.position = transform.position + new Vector3(2*Mathf.Cos(-mouseAngle), 1, 2*Mathf.Sin(-mouseAngle));
+            Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             playerAudio.PlayOneShot(shootSound, 0.4f);
         }
 
