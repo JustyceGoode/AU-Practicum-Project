@@ -76,31 +76,6 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        // if(WaveManager.isGameActive){
-        //     // playerRb.AddForce(Vector3.forward * speed * verticalInput);
-        //     // playerRb.AddForce(Vector3.right * speed * horizontalInput);
-
-        //     Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
-        //     //playerAnimator.setFloat("forwardMovement", movement.z);
-        //     // if(movement.z > 0f){
-        //     //     playerAnimator.SetBool("isMovingForward", true);
-        //     // }
-        //     // else{
-        //     //     playerAnimator.SetBool("isMovingForward", false);
-        //     // }
-
-        //     if((mouseAngle > 0 && mouseAngle < 45) || (mouseAngle < 0 && mouseAngle > -45)){
-        //         if(movement.z > 0f){
-        //             playerAnimator.SetBool("isMovingForward", true);
-        //         }
-        //     }
-        //     else{
-        //         playerAnimator.SetBool("isMovingForward", false);
-        //     }
-
-        //     playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
-        // }
-
         //playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
 
         //Code for the gun to lock at the mouse
