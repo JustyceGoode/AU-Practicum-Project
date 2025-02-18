@@ -5,10 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Get Enemy parts
-    public GameObject enemyGun;
+    //public GameObject enemyGun;
 
     //Enemy movement variables
-    private float speed = 10.0f;
+    private float speed = 1.0f;
     private Rigidbody enemyRb;
     public GameObject player;
     private int xBoundary = 15;
@@ -49,17 +49,21 @@ public class Enemy : MonoBehaviour
         Vector3 followDirection = (player.transform.position - transform.position).normalized;
 
         //Direction for the enemy to aim at the player
-        Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(enemyGun.transform.position.x, enemyGun.transform.position.z);
+        Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
         lookDirection = lookDirection.normalized;
 
         //Have the enemy follow the player at a distance
         float dist = Vector3.Distance(transform.position, player.transform.position);
 
         if(dist > 3.25f){
-            enemyRb.AddForce(followDirection * speed);
+            //enemyRb.AddForce(followDirection * speed);
+            //Vector3 movement = followDirection * speed;
+            enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime);
         }
         else if(dist < 2.75f){
-            enemyRb.AddForce(-followDirection * speed);
+            //enemyRb.AddForce(-followDirection * speed);
+            //Vector3 movement = followDirection * speed;
+            enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime);
         }
 
         //Keep enemy in bounds
@@ -77,17 +81,17 @@ public class Enemy : MonoBehaviour
         }
 
         //enemyWheelRb.AddForce(followDirection * speed);
-        enemyGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
+        //enemyGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
 
         float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
-        enemyGun.transform.eulerAngles = new Vector3 (0, -lookAngle, 90);
+        transform.eulerAngles = new Vector3 (0, -lookAngle, 0);
         float lookRadian = (lookAngle / 180) * (Mathf.PI);
 
         //Shoot bullets while the game is active
         if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
-                Instantiate(bulletPrefab, enemyGun.transform.position + new Vector3(1.25f * Mathf.Cos(lookRadian), 0, 1.25f  *Mathf.Sin(lookRadian)), enemyGun.transform.rotation);
+                Instantiate(bulletPrefab, transform.position + new Vector3(1.25f * Mathf.Cos(lookRadian), 0, 1.25f  *Mathf.Sin(lookRadian)), Quaternion.Euler(new Vector3(0, -lookAngle, 90)));
                 //Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
                 timePassed = 0f;
             }

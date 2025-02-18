@@ -57,7 +57,7 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         //Variables to keep track of objects on the playing field.
-        int enemyCount = FindObjectsOfType<NewEnemy>().Length;
+        int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<Portal>().Length;
         //int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
         int itemCount = FindObjectsOfType<Item>().Length;
