@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
 
+        if(transform.position.x > boundary || transform.position.x < -boundary){
+            Destroy(gameObject);
+        }
+
         if(transform.position.z > boundary || transform.position.z < -boundary){
             Destroy(gameObject);
         }
