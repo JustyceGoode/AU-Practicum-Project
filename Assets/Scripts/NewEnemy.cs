@@ -30,6 +30,10 @@ public class NewEnemy : MonoBehaviour
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
 
+    //Materials and Textures
+    //public Material bodyMaterial;
+    //public Texture bodyTexture;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,11 @@ public class NewEnemy : MonoBehaviour
         //A non-static variable has to be assigned to a static variable in the start function.
         damage = EnemyId * 5 + 10;
         scorePoints = EnemyId * 10 + 10;
+
+        // if(EnemyId == 1){
+        //     //healthPoints = 0;
+        //     //bodyMaterial.mainTexture = bodyTexture;
+        // }
     }
 
     // Update is called once per frame
