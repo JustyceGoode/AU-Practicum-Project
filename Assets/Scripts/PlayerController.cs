@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
-            healthPoints -= Enemy.damage;
+            healthPoints -= NewEnemy.damage;
             //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
