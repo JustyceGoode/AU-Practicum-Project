@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2000503271543225230, guid: e52a44ff48b9f704085c1a85c335a0aa, type: 3}
-  - {fileID: 2209658842221267353, guid: 0d0c82603a288be44b0500d6ecd6ef81, type: 3}
+  - {fileID: 6509983327167082222, guid: b35c59d1cda6938429754d733110a806, type: 3}
+  - {fileID: 4755928709551698021, guid: d5ab918f8858de148995ba282e122c2f, type: 3}
   explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
   explosionSound: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
