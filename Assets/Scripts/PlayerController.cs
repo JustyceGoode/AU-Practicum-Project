@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
             // playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
-            playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
+            playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime * Time.timeScale);
 
             //Check if the player is moving
             if(movement.x != 0f || movement.z != 0f){

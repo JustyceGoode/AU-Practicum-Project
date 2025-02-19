@@ -58,12 +58,12 @@ public class Enemy : MonoBehaviour
         if(dist > 3.25f){
             //enemyRb.AddForce(followDirection * speed);
             //Vector3 movement = followDirection * speed;
-            enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime);
+            enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
         }
         else if(dist < 2.75f){
             //enemyRb.AddForce(-followDirection * speed);
             //Vector3 movement = followDirection * speed;
-            enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime);
+            enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
         }
 
         //Keep enemy in bounds
