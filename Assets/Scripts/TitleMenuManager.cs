@@ -16,6 +16,9 @@ public class TitleMenuManager : MonoBehaviour
     public TextMeshProUGUI controlMenuHeaderText;
     public TextMeshProUGUI controlMenuText;
     public Button controlsBackButton;
+    public GameObject medkit;
+    public GameObject powerUp;
+    public GameObject healthUp;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,6 @@ public class TitleMenuManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    //TODO: Add item models to Controls Menu
     public void OpenControlsMenu(){
         titleText.gameObject.SetActive(false);
         startGameButton.gameObject.SetActive(false);
@@ -42,6 +44,9 @@ public class TitleMenuManager : MonoBehaviour
         controlMenuHeaderText.gameObject.SetActive(true);
         controlMenuText.gameObject.SetActive(true);
         controlsBackButton.gameObject.SetActive(true);
+        medkit.gameObject.SetActive(true);
+        powerUp.gameObject.SetActive(true);
+        healthUp.gameObject.SetActive(true);
     }
 
     public void CloseControlsMenu(){
@@ -51,5 +56,8 @@ public class TitleMenuManager : MonoBehaviour
         controlMenuHeaderText.gameObject.SetActive(false);
         controlMenuText.gameObject.SetActive(false);
         controlsBackButton.gameObject.SetActive(false);
+        medkit.gameObject.SetActive(false);
+        powerUp.gameObject.SetActive(false);
+        healthUp.gameObject.SetActive(false);
     }
 }
