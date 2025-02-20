@@ -31,7 +31,8 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     //private int itemCount;
-    private bool waveBreak = true;
+    private bool waveBreak;
+    private bool victory;
 
     //UI variables
     public TextMeshProUGUI gameOverText;
@@ -40,12 +41,15 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI pauseText;
     public Button continueButton;
     public Button backToTitleButton;
+    public TextMeshProUGUI youWinText;
 
     // Start is called before the first frame update
     void Start()
     {
         isGameActive = true;
-        //Time.timeScale = 1;
+        waveBreak = true;
+        victory = false;
+        Time.timeScale = 1;
         waveCounter = 1;
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
@@ -68,8 +72,13 @@ public class WaveManager : MonoBehaviour
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
+            if(waveCounter == 3){
+                YouWin();
+                victory = true;
+            }
+
             //Generate items before the next wave starts
-            if(waveBreak){
+            if(waveBreak && !victory){
                 Instantiate(powerUpPrefab, new Vector3(3,1,0), powerUpPrefab.transform.rotation);
                 Instantiate(medkitPrefab, new Vector3(-3,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
@@ -79,7 +88,7 @@ public class WaveManager : MonoBehaviour
             }
 
             //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
-            if(itemCount <= 1){
+            if(itemCount <= 1 && !victory){
                 Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
                 strongEnemyChance += 0.2f;
                 int enemyIndex = DiceRoller(strongEnemyChance);
@@ -142,6 +151,14 @@ public class WaveManager : MonoBehaviour
         continueButton.gameObject.SetActive(false);
         backToTitleButton.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void YouWin(){
+        Time.timeScale = 0;
+        //Debug.Log("You win!");
+        youWinText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        backToTitleButton.gameObject.SetActive(true);
     }
 
     public void BackToTitle(){
