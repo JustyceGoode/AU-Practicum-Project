@@ -34,6 +34,7 @@ public class TitleMenuManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    //TODO: Add item models to Controls Menu
     public void OpenControlsMenu(){
         titleText.gameObject.SetActive(false);
         startGameButton.gameObject.SetActive(false);

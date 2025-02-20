@@ -20,7 +20,6 @@ public class Item : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         //Medkit
         //TODO: Balance medkits to make them viable compared to health up items.
-        //TODO: There is a bug where the if the player heals over their max health, it doesn't revert down.
         if(itemId == 0){
             PlayerController.healthPoints += 30;
             if(PlayerController.healthPoints > PlayerController.maxHealthPoints){

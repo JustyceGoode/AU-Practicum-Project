@@ -19,7 +19,6 @@ public class OldEnemy : MonoBehaviour
     private float timePassed = 0f;
 
     //Enemy stats
-    //TODO Balance enemy stats
     public int healthPoints;
     public int EnemyId;
     public static int damage;
