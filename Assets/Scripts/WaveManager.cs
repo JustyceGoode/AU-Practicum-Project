@@ -16,10 +16,10 @@ public class WaveManager : MonoBehaviour
 
     //Portal spawn locations
     public Vector3[] portalSpawnPoints = {
-        new Vector3(11,1,5),
-        new Vector3(-11,1,5),
-        new Vector3(11,1,-5),
-        new Vector3(-11,1,-5),
+        new Vector3(11,1f,5),
+        new Vector3(-11,1f,5),
+        new Vector3(11,1f,-5),
+        new Vector3(-11,1f,-5),
     };
 
     private int waveCounter;
@@ -114,7 +114,7 @@ public class WaveManager : MonoBehaviour
     private Vector3 GenerateEnemySpawnPosition(){
         int enemyXPoint = Random.Range(-6,6);
         int enemyZPoint = Random.Range(-4,4);
-        return new Vector3(enemyXPoint,1,enemyZPoint);
+        return new Vector3(enemyXPoint,2,enemyZPoint);
     }
 
     public void GameOver(){
