@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public Slider volumeSlider;
+    //private bool muted;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,12 @@ public class SoundManager : MonoBehaviour
 
     public void ChangeVolume(){
         AudioListener.volume = volumeSlider.value;
+    }
+
+    public void SoundToggle(){
+        //muted = !muted;
+        //AudioListener.pause = muted;
+        AudioListener.pause = !AudioListener.pause;
     }
 
     private void Save(){
