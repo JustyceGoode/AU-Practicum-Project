@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 2.0f;
 
     //World Boundary
-    private int xBoundary = 15;
-    private int zBoundary = 8;
+    private int xBoundary = 20;
+    private int zBoundary = 10;
 
     //Bullets
     public GameObject bulletPrefab;
