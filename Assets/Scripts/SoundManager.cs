@@ -6,11 +6,17 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public Slider volumeSlider;
-    //private bool muted;
+    private bool muted = false;
+
+    //public Button soundButton;
+    public Image soundOnIcon;
+    public Image soundOffIcon;
 
     // Start is called before the first frame update
     void Start()
     {
+
+
         if(!PlayerPrefs.HasKey("musicVolume")){
             PlayerPrefs.SetFloat("musicVolume", 1);
             Load();
@@ -31,10 +37,19 @@ public class SoundManager : MonoBehaviour
     }
 
     public void SoundToggle(){
-        //muted = !muted;
-        //AudioListener.pause = muted;
-        AudioListener.pause = !AudioListener.pause;
+        muted = !muted;
+        AudioListener.pause = muted;
+        //AudioListener.pause = !AudioListener.pause;
+        //soundOnIcon.enabled = !muted;
+        //soundOffIcon.enabled = muted;
+        soundOnIcon.gameObject.SetActive(!muted);
+        soundOffIcon.gameObject.SetActive(muted);
     }
+
+    // public void UpdateButtonIcon(){
+    //     soundOnIcon.enabled = !muted;
+    //     soundOffIcon.enabled = muted;
+    // }
 
     private void Save(){
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
