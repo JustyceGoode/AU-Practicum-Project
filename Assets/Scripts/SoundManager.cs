@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Camera.main.transform.position;
     }
 
     public void ChangeVolume(){
