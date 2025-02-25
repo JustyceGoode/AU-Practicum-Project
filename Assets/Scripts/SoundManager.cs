@@ -27,7 +27,20 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Camera.main.transform.position;
+        //transform.position = Camera.main.transform.position;
+    }
+
+    public void Awake(){
+        // if(instance == null){
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);
+
+        // }
+        // else{
+        //     Destroy(gameObject);
+        // }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeVolume(){
