@@ -31,7 +31,9 @@ public class SoundManager : MonoBehaviour
     }
 
     public void ChangeVolume(){
-        AudioListener.volume = volumeSlider.value;
+        if(!muted){
+            AudioListener.volume = volumeSlider.value;
+        }
     }
 
     public void SoundToggle(){
