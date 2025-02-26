@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     public Image soundOnIcon;
     public Image soundOffIcon;
 
+    public static SoundManager instance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,16 +33,18 @@ public class SoundManager : MonoBehaviour
     }
 
     public void Awake(){
-        // if(instance == null){
-        //     instance = this;
-        //     DontDestroyOnLoad(gameObject);
+        if(instance == null){
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(volumeSlider.gameObject);
+            
+        }
+        else{
+            Destroy(gameObject);
+            //Destroy(volumeSlider.gameObject);
+        }
 
-        // }
-        // else{
-        //     Destroy(gameObject);
-        // }
-
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeVolume(){
