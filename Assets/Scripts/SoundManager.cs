@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public Slider volumeSlider;
-    private bool muted = false;
+    //private bool muted = false;
+    private bool muted;
 
     //public Button soundButton;
     public Image soundOnIcon;
@@ -17,24 +18,28 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!PlayerPrefs.HasKey("musicVolume")){
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            Load();
-        }
-        else{
-            Load();
-        }
+        // if(!PlayerPrefs.HasKey("musicVolume")){
+        //     PlayerPrefs.SetFloat("musicVolume", 1);
+        //     Load();
+        // }
+        // else{
+        //     Load();
+        // }
         if(!PlayerPrefs.HasKey("muted")){
             PlayerPrefs.SetFloat("muted", 0);
             Load();
         }
         else{
+            Debug.Log("Player Prefs Has Mute Key: " + PlayerPrefs.HasKey("muted"));
             Load();
         }
 
         AudioListener.pause = muted;
         soundOnIcon.gameObject.SetActive(!muted);
         soundOffIcon.gameObject.SetActive(muted);
+        
+        //Debug.Log("Player Prefs Muted: " + PlayerPrefs.GetInt("muted"));
+        //Debug.Log("Muted: " + muted);
     }
 
     // Update is called once per frame
@@ -71,8 +76,10 @@ public class SoundManager : MonoBehaviour
         AudioListener.pause = muted;
         soundOnIcon.gameObject.SetActive(!muted);
         soundOffIcon.gameObject.SetActive(muted);
+        //Debug.Log("Muted: " + muted);
 
         Save();
+        Debug.Log("Player Prefs Muted: " + PlayerPrefs.GetInt("muted"));
     }
 
     private void Save(){
@@ -88,6 +95,16 @@ public class SoundManager : MonoBehaviour
 
     public void Load(){
         volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+
+        Debug.Log("Load Function");
+        Debug.Log("Player Prefs Muted: " + PlayerPrefs.GetInt("muted"));
         muted = (PlayerPrefs.GetInt("muted") == 1);
+        Debug.Log("Muted: " + muted);
+        // if(PlayerPrefs.GetInt("muted") == 1){
+        //     muted = true;
+        // }
+        // else{
+        //     muted = false;
+        // }
     }
 }
