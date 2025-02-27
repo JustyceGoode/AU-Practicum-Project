@@ -12,18 +12,19 @@ public class SoundManager : MonoBehaviour
     public Image soundOnIcon;
     public Image soundOffIcon;
 
-    public static SoundManager instance;
+    //public static SoundManager instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        // if(!PlayerPrefs.HasKey("musicVolume")){
-        //     PlayerPrefs.SetFloat("musicVolume", 1);
-        //     Load();
-        // }
-        // else{
-        //     Load();
-        // }
+        if(!PlayerPrefs.HasKey("musicVolume") && !PlayerPrefs.HasKey("muted")){
+            PlayerPrefs.SetFloat("musicVolume", 1);
+            PlayerPrefs.SetFloat("muted", 0);
+            Load();
+        }
+        else{
+            Load();
+        }
     }
 
     // Update is called once per frame
@@ -32,20 +33,20 @@ public class SoundManager : MonoBehaviour
         //transform.position = Camera.main.transform.position;
     }
 
-    public void Awake(){
-        if(instance == null){
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            //DontDestroyOnLoad(volumeSlider.gameObject);
+    // public void Awake(){
+    //     if(instance == null){
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //         //DontDestroyOnLoad(volumeSlider.gameObject);
             
-        }
-        else{
-            Destroy(gameObject);
-            //Destroy(volumeSlider.gameObject);
-        }
+    //     }
+    //     else{
+    //         Destroy(gameObject);
+    //         //Destroy(volumeSlider.gameObject);
+    //     }
 
-        //DontDestroyOnLoad(gameObject);
-    }
+    //     //DontDestroyOnLoad(gameObject);
+    // }
 
     public void ChangeVolume(){
         if(!muted){
@@ -68,11 +69,19 @@ public class SoundManager : MonoBehaviour
     //     soundOffIcon.enabled = muted;
     // }
 
-    // private void Save(){
-    //     PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    // }
+    private void Save(){
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+        if(muted){
+            PlayerPrefs.SetInt("muted", 1);
+        }
+        else{
+            PlayerPrefs.SetInt("muted", 0);
+        }
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+    }
 
-    // public void Load(){
-    //     volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
-    // }
+    public void Load(){
+        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        muted = (PlayerPrefs.GetInt("muted") == 1);
+    }
 }
