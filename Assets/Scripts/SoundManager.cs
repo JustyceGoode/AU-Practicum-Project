@@ -27,15 +27,17 @@ public class SoundManager : MonoBehaviour
         // else{
         //     Load();
         // }
-        if(!PlayerPrefs.HasKey("muted")){
-            PlayerPrefs.SetFloat("muted", 0);
-            managerAudioSource.Play();
-            Load();
-        }
-        else{
-            Debug.Log("Player Prefs Has Mute Key: " + PlayerPrefs.HasKey("muted"));
-            Load();
-        }
+        // if(!PlayerPrefs.HasKey("muted")){
+        //     PlayerPrefs.SetFloat("muted", 0);
+        //     managerAudioSource.Play();
+        //     Load();
+        // }
+        // else{
+        //     Debug.Log("Player Prefs Has Mute Key: " + PlayerPrefs.HasKey("muted"));
+        //     Load();
+        // }
+
+        Load();
 
         AudioListener.pause = muted;
         soundOnIcon.gameObject.SetActive(!muted);
@@ -101,7 +103,7 @@ public class SoundManager : MonoBehaviour
 
         Debug.Log("Load Function");
         Debug.Log("Player Prefs Muted: " + PlayerPrefs.GetInt("muted"));
-        muted = (PlayerPrefs.GetInt("muted") == 1);
+        //muted = (PlayerPrefs.GetInt("muted") == 1);
         Debug.Log("Muted: " + muted);
         if(PlayerPrefs.GetInt("muted") == 1){
             muted = true;
