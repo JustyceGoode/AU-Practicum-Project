@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+    private AudioSource managerAudioSource;
     public Slider volumeSlider;
     //private bool muted = false;
     private bool muted;
@@ -18,6 +19,7 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        managerAudioSource = GetComponent<AudioSource>();
         // if(!PlayerPrefs.HasKey("musicVolume")){
         //     PlayerPrefs.SetFloat("musicVolume", 1);
         //     Load();
@@ -27,6 +29,7 @@ public class SoundManager : MonoBehaviour
         // }
         if(!PlayerPrefs.HasKey("muted")){
             PlayerPrefs.SetFloat("muted", 0);
+            managerAudioSource.Play();
             Load();
         }
         else{
@@ -100,11 +103,12 @@ public class SoundManager : MonoBehaviour
         Debug.Log("Player Prefs Muted: " + PlayerPrefs.GetInt("muted"));
         muted = (PlayerPrefs.GetInt("muted") == 1);
         Debug.Log("Muted: " + muted);
-        // if(PlayerPrefs.GetInt("muted") == 1){
-        //     muted = true;
-        // }
-        // else{
-        //     muted = false;
-        // }
+        if(PlayerPrefs.GetInt("muted") == 1){
+            muted = true;
+        }
+        else{
+            muted = false;
+            managerAudioSource.Play();
+        }
     }
 }
