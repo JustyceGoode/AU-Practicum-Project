@@ -13,12 +13,13 @@ public class SoundManager : MonoBehaviour
     public Image soundOnIcon;
     public Image soundOffIcon;
 
-    //public static SoundManager instance;
+    public static SoundManager instance;
 
     // Start is called before the first frame update
     void Start()
     {
         managerAudioSource = GetComponent<AudioSource>();
+
         if(!PlayerPrefs.HasKey("musicVolume")){
             PlayerPrefs.SetFloat("musicVolume", 1);
             Load();
@@ -51,20 +52,23 @@ public class SoundManager : MonoBehaviour
         //transform.position = Camera.main.transform.position;
     }
 
-    // public void Awake(){
-    //     if(instance == null){
-    //         instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //         //DontDestroyOnLoad(volumeSlider.gameObject);
+    //TODO
+    //When ever the Sound Manager is destroyed and raplaced,
+    //the object is removed from the button and sliders.
+    public void Awake(){
+        if(instance == null){
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(volumeSlider.gameObject);
             
-    //     }
-    //     else{
-    //         Destroy(gameObject);
-    //         //Destroy(volumeSlider.gameObject);
-    //     }
+        }
+        else{
+            Destroy(gameObject);
+            //Destroy(volumeSlider.gameObject);
+        }
 
-    //     //DontDestroyOnLoad(gameObject);
-    // }
+        //DontDestroyOnLoad(gameObject);
+    }
 
     public void ChangeVolume(){
         if(!muted){
