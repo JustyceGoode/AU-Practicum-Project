@@ -20,19 +20,28 @@ public class SoundManager : MonoBehaviour
     {
         managerAudioSource = GetComponent<AudioSource>();
 
-        if(!PlayerPrefs.HasKey("musicVolume")){
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            Load();
+        // if(!PlayerPrefs.HasKey("musicVolume")){
+        //     PlayerPrefs.SetFloat("musicVolume", 1);
+        //     Load();
+        // }
+        // else{
+        //     Load();
+        // }
+        // if(!PlayerPrefs.HasKey("muted")){
+        //     PlayerPrefs.SetFloat("muted", 0);
+        //     Load();
+        // }
+        // else{
+        //     Load();
+        // }
+
+        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+
+        if(PlayerPrefs.GetInt("muted") == 1){
+            muted = true;
         }
         else{
-            Load();
-        }
-        if(!PlayerPrefs.HasKey("muted")){
-            PlayerPrefs.SetFloat("muted", 0);
-            Load();
-        }
-        else{
-            Load();
+            muted = false;
         }
 
         if(!muted){
@@ -75,8 +84,8 @@ public class SoundManager : MonoBehaviour
         // }
 
         AudioListener.volume = volumeSlider.value;
-
-        Save();
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+        //Save();
     }
 
     public void SoundToggle(){
@@ -91,27 +100,34 @@ public class SoundManager : MonoBehaviour
         soundOnIcon.gameObject.SetActive(!muted);
         soundOffIcon.gameObject.SetActive(muted);
 
-        Save();
-    }
-
-    private void Save(){
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
         if(muted){
             PlayerPrefs.SetInt("muted", 1);
         }
         else{
             PlayerPrefs.SetInt("muted", 0);
         }
+
+        //Save();
     }
 
-    private void Load(){
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+    // private void Save(){
+    //     PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+    //     if(muted){
+    //         PlayerPrefs.SetInt("muted", 1);
+    //     }
+    //     else{
+    //         PlayerPrefs.SetInt("muted", 0);
+    //     }
+    // }
 
-        if(PlayerPrefs.GetInt("muted") == 1){
-            muted = true;
-        }
-        else{
-            muted = false;
-        }
-    }
+    // private void Load(){
+    //     volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+
+    //     if(PlayerPrefs.GetInt("muted") == 1){
+    //         muted = true;
+    //     }
+    //     else{
+    //         muted = false;
+    //     }
+    // }
 }
