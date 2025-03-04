@@ -50,18 +50,9 @@ public class SoundManager : MonoBehaviour
     {
         //transform.position = Camera.main.transform.position;
     }
-
-    //TODO
-    //When the slider is clicked, the A and D buttons move the slider
-    //When any other place is clicked afterward, the effect ends
     public void ChangeVolume(){
-        // if(!muted){
-        //     AudioListener.volume = volumeSlider.value;
-        // }
-
         AudioListener.volume = volumeSlider.value;
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-        //Save();
     }
 
     public void SoundToggle(){
