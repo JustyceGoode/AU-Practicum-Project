@@ -6,7 +6,6 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     //Get components of the player
-    //public GameObject playerGun;
     public GameObject playerPointer;
     private float pointerDistance = 1.6f;
 
@@ -26,6 +25,7 @@ public class PlayerController : MonoBehaviour
     //Bullets
     public GameObject bulletPrefab;
 
+    //Player Stats
     private static int baseHealthPoints = 100; //Keep this as static so that it can be assigned to HP & maxHP
     public static int healthPoints;
     public static int maxHealthPoints;
@@ -35,10 +35,9 @@ public class PlayerController : MonoBehaviour
     private float fireRate = 0.4f;
     private float canFire = 0f;
 
+    //Sound variables for bullets
     public AudioClip shootSound;
     private AudioSource playerAudio;
-
-    //public float mouseAngle; //Temporary global declaration
 
     // Start is called before the first frame update
     void Start()
@@ -59,8 +58,6 @@ public class PlayerController : MonoBehaviour
         //Get Input for player movement
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        // transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        // transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
         //Keep player in bounds
         if(transform.position.x > xBoundary){
@@ -76,43 +73,35 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        //playerGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows player
-
-        //Code for the gun to lock at the mouse
+        //Gun looks at mouse
         Vector3 mousePositionScreen = Input.mousePosition;
         mousePositionScreen.z = Camera.main.transform.position.y - 1;
         Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
 
         Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
         float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
-        //Debug.Log("Mouse Angle: " + mouseAngle);
         transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
         
+        //Spawns bullet away from player
         float mouseRadian = (mouseAngle / 180) * (Mathf.PI);
-        //float pointerDistance = 2;
         playerPointer.transform.position = transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian));
 
         if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
-            //Debug.Log("Player Attack: " + attackDamage);
-            canFire = Time.time + fireRate;
-            //Instantiate(bulletPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
-            //playerPointer.transform.position = transform.position + new Vector3(2*Mathf.Cos(-mouseAngle), 1, 2*Mathf.Sin(-mouseAngle));
+            canFire = Time.time + fireRate; //Controls the fire rate
             Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             playerAudio.PlayOneShot(shootSound, 0.4f);
         }
 
         //Player can move while game is active
         if(WaveManager.isGameActive){
-            // playerRb.AddForce(Vector3.forward * speed * verticalInput);
-            // playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
+            //Move player
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
             playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime * Time.timeScale);
 
             //Check if the player is moving
             if(movement.x != 0f || movement.z != 0f){
                 playerAnimator.SetBool("isMoving", true);
-                //Debug.Log("Mouse Angle: " + mouseAngle);
             }
             else{
                 playerAnimator.SetBool("isMoving", false);
@@ -261,8 +250,6 @@ public class PlayerController : MonoBehaviour
                     playerAnimator.SetBool("movingRight", true);
                 }
             }
-
-            //playerRb.MovePosition(playerRb.position + movement * Time.fixedDeltaTime);
         }
 
         //Update player HP text
@@ -272,7 +259,6 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
             healthPoints -= Enemy.damage;
-            //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){

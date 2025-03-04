@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+    //Game Object Variables
     private AudioSource managerAudioSource;
     public Slider volumeSlider;
-    private bool muted;
 
-    //public Button soundButton;
+    //Internal variables
+    private bool muted;
     public Image soundOnIcon;
     public Image soundOffIcon;
-
-    //public static SoundManager instance;
 
     // Start is called before the first frame update
     void Start()
@@ -45,16 +44,13 @@ public class SoundManager : MonoBehaviour
         soundOffIcon.gameObject.SetActive(muted);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //transform.position = Camera.main.transform.position;
-    }
+    //Function for Volume Slider
     public void ChangeVolume(){
         AudioListener.volume = volumeSlider.value;
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
     }
 
+    //Function for Mute Button
     public void SoundToggle(){
         muted = !muted;
         if(!muted){
