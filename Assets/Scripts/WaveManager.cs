@@ -63,7 +63,6 @@ public class WaveManager : MonoBehaviour
         //Variables to keep track of objects on the playing field.
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         int portalCount = FindObjectsOfType<Portal>().Length;
-        //int itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
         int itemCount = FindObjectsOfType<Item>().Length;
 
         //Update score
@@ -82,7 +81,6 @@ public class WaveManager : MonoBehaviour
                 Instantiate(powerUpPrefab, new Vector3(3,1,0), powerUpPrefab.transform.rotation);
                 Instantiate(medkitPrefab, new Vector3(-3,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
-                //itemCount = FindObjectsOfType<TestScript>().Length + FindObjectsOfType<Item>().Length;
                 itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
             }
@@ -107,7 +105,6 @@ public class WaveManager : MonoBehaviour
         if(PlayerController.healthPoints <= 0){
             GameOver();
             isGameActive = false;
-            //Time.timeScale = 0;
         }
 
         if(Input.GetKeyDown(KeyCode.Escape)){
@@ -137,7 +134,6 @@ public class WaveManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //Bug TODO: Whenever the game is paused, the enemies 'build up speed'; when the game unpauses, they zoom.
     public void PauseGame(){
         pauseText.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
@@ -155,7 +151,6 @@ public class WaveManager : MonoBehaviour
 
     public void YouWin(){
         Time.timeScale = 0;
-        //Debug.Log("You win!");
         youWinText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         backToTitleButton.gameObject.SetActive(true);
