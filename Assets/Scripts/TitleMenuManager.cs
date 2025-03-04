@@ -11,6 +11,7 @@ public class TitleMenuManager : MonoBehaviour
     public TextMeshProUGUI titleText;
     public Button startGameButton;
     public Button controlMenuButton;
+    public Button exitGameButton;
 
     //Control Menu Variables
     public TextMeshProUGUI controlMenuHeaderText;
@@ -41,6 +42,7 @@ public class TitleMenuManager : MonoBehaviour
         titleText.gameObject.SetActive(false);
         startGameButton.gameObject.SetActive(false);
         controlMenuButton.gameObject.SetActive(false);
+        exitGameButton.gameObject.SetActive(false);
         controlMenuHeaderText.gameObject.SetActive(true);
         controlMenuText.gameObject.SetActive(true);
         controlsBackButton.gameObject.SetActive(true);
@@ -53,11 +55,17 @@ public class TitleMenuManager : MonoBehaviour
         titleText.gameObject.SetActive(true);
         startGameButton.gameObject.SetActive(true);
         controlMenuButton.gameObject.SetActive(true);
+        exitGameButton.gameObject.SetActive(true);
         controlMenuHeaderText.gameObject.SetActive(false);
         controlMenuText.gameObject.SetActive(false);
         controlsBackButton.gameObject.SetActive(false);
         medkit.gameObject.SetActive(false);
         powerUp.gameObject.SetActive(false);
         healthUp.gameObject.SetActive(false);
+    }
+
+    public void ExitGame(){
+        Application.Quit();
+        Debug.Log("Game is exiting");
     }
 }
