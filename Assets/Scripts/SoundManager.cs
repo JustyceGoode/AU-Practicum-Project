@@ -35,7 +35,6 @@ public class SoundManager : MonoBehaviour
             Load();
         }
 
-        //Load();
         if(!muted){
             managerAudioSource.Play();
         }
@@ -55,25 +54,27 @@ public class SoundManager : MonoBehaviour
     //TODO
     //When ever the Sound Manager is destroyed and raplaced,
     //the object is removed from the button and sliders.
-    public void Awake(){
-        if(instance == null){
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            //DontDestroyOnLoad(volumeSlider.gameObject);
+    // public void Awake(){
+    //     if(instance == null){
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //         //DontDestroyOnLoad(volumeSlider.gameObject);
             
-        }
-        else{
-            Destroy(gameObject);
-            //Destroy(volumeSlider.gameObject);
-        }
+    //     }
+    //     else{
+    //         Destroy(gameObject);
+    //         //Destroy(volumeSlider.gameObject);
+    //     }
 
-        //DontDestroyOnLoad(gameObject);
-    }
+    //     //DontDestroyOnLoad(gameObject);
+    // }
 
     public void ChangeVolume(){
-        if(!muted){
-            AudioListener.volume = volumeSlider.value;
-        }
+        // if(!muted){
+        //     AudioListener.volume = volumeSlider.value;
+        // }
+
+        AudioListener.volume = volumeSlider.value;
 
         Save();
     }
