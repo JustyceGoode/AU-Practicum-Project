@@ -13,35 +13,26 @@ public class SoundManager : MonoBehaviour
     public Image soundOnIcon;
     public Image soundOffIcon;
 
-    public static SoundManager instance;
+    //public static SoundManager instance;
 
     // Start is called before the first frame update
     void Start()
     {
         managerAudioSource = GetComponent<AudioSource>();
 
-        // if(!PlayerPrefs.HasKey("musicVolume")){
-        //     PlayerPrefs.SetFloat("musicVolume", 1);
-        //     Load();
-        // }
-        // else{
-        //     Load();
-        // }
-        // if(!PlayerPrefs.HasKey("muted")){
-        //     PlayerPrefs.SetFloat("muted", 0);
-        //     Load();
-        // }
-        // else{
-        //     Load();
-        // }
-
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
-
-        if(PlayerPrefs.GetInt("muted") == 1){
-            muted = true;
+        //Load Volume Prefs
+        if(PlayerPrefs.HasKey("musicVolume")){
+            volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
         }
-        else{
-            muted = false;
+
+        //Load Muted Prefs
+        if(PlayerPrefs.HasKey("muted")){
+            if(PlayerPrefs.GetInt("muted") == 1){
+                muted = true;
+            }
+            else{
+                muted = false;
+            }
         }
 
         if(!muted){
@@ -61,23 +52,8 @@ public class SoundManager : MonoBehaviour
     }
 
     //TODO
-    //When ever the Sound Manager is destroyed and raplaced,
-    //the object is removed from the button and sliders.
-    // public void Awake(){
-    //     if(instance == null){
-    //         instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //         //DontDestroyOnLoad(volumeSlider.gameObject);
-            
-    //     }
-    //     else{
-    //         Destroy(gameObject);
-    //         //Destroy(volumeSlider.gameObject);
-    //     }
-
-    //     //DontDestroyOnLoad(gameObject);
-    // }
-
+    //When the slider is clicked, the A and D buttons move the slider
+    //When any other place is clicked afterward, the effect ends
     public void ChangeVolume(){
         // if(!muted){
         //     AudioListener.volume = volumeSlider.value;
@@ -106,28 +82,5 @@ public class SoundManager : MonoBehaviour
         else{
             PlayerPrefs.SetInt("muted", 0);
         }
-
-        //Save();
     }
-
-    // private void Save(){
-    //     PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    //     if(muted){
-    //         PlayerPrefs.SetInt("muted", 1);
-    //     }
-    //     else{
-    //         PlayerPrefs.SetInt("muted", 0);
-    //     }
-    // }
-
-    // private void Load(){
-    //     volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
-
-    //     if(PlayerPrefs.GetInt("muted") == 1){
-    //         muted = true;
-    //     }
-    //     else{
-    //         muted = false;
-    //     }
-    // }
 }
