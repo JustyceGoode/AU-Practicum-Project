@@ -21,6 +21,12 @@ public class TitleMenuManager : MonoBehaviour
     public GameObject powerUp;
     public GameObject healthUp;
 
+    //Credits Menu Elements
+    public Button creditsButton;
+    public TextMeshProUGUI creditsMenuHeaderText;
+    public TextMeshProUGUI creditsMenuText;
+    public Button creditsBackButton;
+
     public void StartGame(){
         SceneManager.LoadScene("My Game");
         Time.timeScale = 1;
@@ -32,6 +38,7 @@ public class TitleMenuManager : MonoBehaviour
         startGameButton.gameObject.SetActive(false);
         controlMenuButton.gameObject.SetActive(false);
         exitGameButton.gameObject.SetActive(false);
+        creditsButton.gameObject.SetActive(false);
 
         //Enable Control UI
         controlMenuHeaderText.gameObject.SetActive(true);
@@ -48,6 +55,7 @@ public class TitleMenuManager : MonoBehaviour
         startGameButton.gameObject.SetActive(true);
         controlMenuButton.gameObject.SetActive(true);
         exitGameButton.gameObject.SetActive(true);
+        creditsButton.gameObject.SetActive(true);
 
         //Disable Contrls UI
         controlMenuHeaderText.gameObject.SetActive(false);
@@ -56,6 +64,34 @@ public class TitleMenuManager : MonoBehaviour
         medkit.gameObject.SetActive(false);
         powerUp.gameObject.SetActive(false);
         healthUp.gameObject.SetActive(false);
+    }
+
+    public void OpenCreditsMenu(){
+        //Disable Title UI
+        titleText.gameObject.SetActive(false);
+        startGameButton.gameObject.SetActive(false);
+        controlMenuButton.gameObject.SetActive(false);
+        exitGameButton.gameObject.SetActive(false);
+        creditsButton.gameObject.SetActive(false);
+
+        //Enable Credits UI
+        creditsMenuHeaderText.gameObject.SetActive(true);
+        creditsMenuText.gameObject.SetActive(true);
+        creditsBackButton.gameObject.SetActive(true);
+    }
+
+    public void CloseCreditsMenu(){
+        //Enable Title UI
+        titleText.gameObject.SetActive(true);
+        startGameButton.gameObject.SetActive(true);
+        controlMenuButton.gameObject.SetActive(true);
+        exitGameButton.gameObject.SetActive(true);
+        creditsButton.gameObject.SetActive(true);
+
+        //Disable Credits UI
+        creditsMenuHeaderText.gameObject.SetActive(false);
+        creditsMenuText.gameObject.SetActive(false);
+        creditsBackButton.gameObject.SetActive(false);
     }
 
     public void ExitGame(){
