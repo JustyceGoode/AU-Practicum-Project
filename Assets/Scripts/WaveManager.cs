@@ -20,6 +20,10 @@ public class WaveManager : MonoBehaviour
         new Vector3(-11,1f,5),
         new Vector3(11,1f,-5),
         new Vector3(-11,1f,-5),
+        new Vector3(11,1f,0),
+        new Vector3(-11,1f,0),
+        new Vector3(0,1f,5),
+        new Vector3(0,1f,-5),
     };
 
     private int waveCounter;
@@ -71,7 +75,7 @@ public class WaveManager : MonoBehaviour
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            if(waveCounter == 3){
+            if(waveCounter == 5){
                 YouWin();
                 victory = true;
             }
@@ -113,7 +117,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private Vector3 GeneratePortalSpawnPosition(){
-        int pointIndex = Random.Range(0,3);
+        int pointIndex = Random.Range(0,7);
         return portalSpawnPoints[pointIndex];
     }
 
