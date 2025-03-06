@@ -16,14 +16,14 @@ public class WaveManager : MonoBehaviour
 
     //Portal spawn locations
     private Vector3[] portalSpawnPoints = {
-        new Vector3(11,1f,5),
-        new Vector3(-11,1f,5),
-        new Vector3(11,1f,-5),
-        new Vector3(-11,1f,-5),
-        new Vector3(11,1f,0),
-        new Vector3(-11,1f,0),
-        new Vector3(0,1f,5),
-        new Vector3(0,1f,-5),
+        new Vector3(11,1,5),
+        new Vector3(-11,1,5),
+        new Vector3(11,1,-5),
+        new Vector3(-11,1,-5),
+        new Vector3(11,1,0),
+        new Vector3(-11,1,0),
+        new Vector3(0,1,5),
+        new Vector3(0,1,-5),
     };
 
     private int waveCounter;
@@ -69,16 +69,21 @@ public class WaveManager : MonoBehaviour
         int portalCount = FindObjectsOfType<Portal>().Length;
         int itemCount = FindObjectsOfType<Item>().Length;
 
+        //Portal Spawns
+        Vector3 firstPortalSpawn = new Vector3(0,0,0);
+        Vector3 secondPortalSpawn = new Vector3(0,0,0);;
+        Vector3 thirdPortalSpawn = new Vector3(0,0,0);;
+
         //Update score
         scoreText.text = "Score: " + score;
 
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            if(waveCounter == 5){
-                YouWin();
-                victory = true;
-            }
+            // if(waveCounter == 5){
+            //     YouWin();
+            //     victory = true;
+            // }
 
             //Generate items before the next wave starts
             if(waveBreak && !victory){
@@ -91,18 +96,43 @@ public class WaveManager : MonoBehaviour
 
             //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
             if(itemCount <= 1 && !victory){
-                Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
+                waveCounter += 1;
+                waveCounterText.text = "Wave " + waveCounter;
+
+                //Spawn first portal
+                firstPortalSpawn = GeneratePortalSpawnPosition();
+                Instantiate(portalPrefab, firstPortalSpawn, portalPrefab.transform.rotation);
+
+                //Spawn second portal
+                if(waveCounter >= 3){
+                    secondPortalSpawn = GeneratePortalSpawnPosition();
+                    while(secondPortalSpawn == firstPortalSpawn){
+                        secondPortalSpawn = GeneratePortalSpawnPosition();
+                    }
+                    Instantiate(portalPrefab, secondPortalSpawn, portalPrefab.transform.rotation);
+                }
+
+                //Spawn third portal
+                if(waveCounter >= 5){
+                    thirdPortalSpawn = GeneratePortalSpawnPosition();
+                    while(thirdPortalSpawn == firstPortalSpawn || thirdPortalSpawn == secondPortalSpawn){
+                        thirdPortalSpawn = GeneratePortalSpawnPosition();
+                    }
+                    Instantiate(portalPrefab, thirdPortalSpawn, portalPrefab.transform.rotation);
+                }
+                
+                //Spawn enemies
                 strongEnemyChance += 0.2f;
                 int enemyIndex = DiceRoller(strongEnemyChance);
                 Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
                 enemyIndex = DiceRoller(strongEnemyChance);
                 Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
                 waveBreak = true;
-                GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
-                foreach(GameObject item in items)
-                    Destroy(item);
-                waveCounter += 1;
-                waveCounterText.text = "Wave " + waveCounter;
+                GameObject[] leftoverItems = GameObject.FindGameObjectsWithTag("Item");
+                foreach(GameObject leftover in leftoverItems)
+                    Destroy(leftover);
+                // waveCounter += 1;
+                // waveCounterText.text = "Wave " + waveCounter;
             }
         }
 
