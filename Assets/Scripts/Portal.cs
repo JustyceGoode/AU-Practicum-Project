@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
     public GameObject[] enemyPrefabs;
     private float timePassed = 0f;
 
-    private int healthPoints = 65;
+    private int healthPoints = 120;
     //public int playerAttackDamage;
 
     public ParticleSystem explosionParticle;
@@ -39,7 +39,7 @@ public class Portal : MonoBehaviour
         //playerAttackDamage = PlayerController.attackDamage;
 
         //Whent the portal is destroyed.
-        if(healthPoints < 0){
+        if(healthPoints <= 0){
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
             GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
             Destroy(explosion, 2.0f);
@@ -50,8 +50,8 @@ public class Portal : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
             //healthPoints -= playerAttackDamage;
-            //Debug.Log("Portal HP: " + healthPoints);
             healthPoints -= PlayerController.attackDamage;
+            //Debug.Log("Portal Health: " + healthPoints);
             Destroy(other.gameObject);
         }
     }

@@ -13,13 +13,18 @@ public class WaveManager : MonoBehaviour
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
+    public GameObject player;
 
     //Portal spawn locations
-    public Vector3[] portalSpawnPoints = {
-        new Vector3(11,1f,5),
-        new Vector3(-11,1f,5),
-        new Vector3(11,1f,-5),
-        new Vector3(-11,1f,-5),
+    private Vector3[] portalSpawnPoints = {
+        new Vector3(11,1,5),
+        new Vector3(-11,1,5),
+        new Vector3(11,1,-5),
+        new Vector3(-11,1,-5),
+        new Vector3(11,1,0),
+        new Vector3(-11,1,0),
+        new Vector3(0,1,5),
+        new Vector3(0,1,-5),
     };
 
     private int waveCounter;
@@ -46,15 +51,16 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         isGameActive = true;
-        waveBreak = true;
+        waveBreak = false;
         victory = false;
         Time.timeScale = 1;
-        waveCounter = 1;
+        waveCounter = 0;
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
         scoreText.text = "Score: " + score;
-        strongEnemyChance = 0.0f;
+        strongEnemyChance = -0.15f;
     }
 
     // Update is called once per frame
@@ -65,13 +71,22 @@ public class WaveManager : MonoBehaviour
         int portalCount = FindObjectsOfType<Portal>().Length;
         int itemCount = FindObjectsOfType<Item>().Length;
 
+        //Portal Spawns
+        Vector3 firstPortalSpawn = new Vector3(0,0,0);
+        Vector3 secondPortalSpawn = new Vector3(0,0,0);;
+        Vector3 thirdPortalSpawn = new Vector3(0,0,0);;
+
+        //Enemy Spawns
+        Vector3 firstEnemySpawn;
+        Vector3 secondEnemySpawn;
+
         //Update score
         scoreText.text = "Score: " + score;
 
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            if(waveCounter == 3){
+            if(waveCounter == 5){
                 YouWin();
                 victory = true;
             }
@@ -87,18 +102,57 @@ public class WaveManager : MonoBehaviour
 
             //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
             if(itemCount <= 1 && !victory){
-                Instantiate(portalPrefab, GeneratePortalSpawnPosition(), portalPrefab.transform.rotation);
-                strongEnemyChance += 0.2f;
-                int enemyIndex = DiceRoller(strongEnemyChance);
-                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
-                enemyIndex = DiceRoller(strongEnemyChance);
-                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
-                waveBreak = true;
-                GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
-                foreach(GameObject item in items)
-                    Destroy(item);
                 waveCounter += 1;
                 waveCounterText.text = "Wave " + waveCounter;
+
+                //Spawn first portal
+                firstPortalSpawn = GeneratePortalSpawnPosition();
+                Instantiate(portalPrefab, firstPortalSpawn, portalPrefab.transform.rotation);
+
+                //Spawn second portal
+                if(waveCounter >= 3){
+                    secondPortalSpawn = GeneratePortalSpawnPosition();
+                    while(secondPortalSpawn == firstPortalSpawn){
+                        secondPortalSpawn = GeneratePortalSpawnPosition();
+                    }
+                    Instantiate(portalPrefab, secondPortalSpawn, portalPrefab.transform.rotation);
+                }
+
+                //Spawn third portal
+                if(waveCounter >= 5){
+                    thirdPortalSpawn = GeneratePortalSpawnPosition();
+                    while(thirdPortalSpawn == firstPortalSpawn || thirdPortalSpawn == secondPortalSpawn){
+                        thirdPortalSpawn = GeneratePortalSpawnPosition();
+                    }
+                    Instantiate(portalPrefab, thirdPortalSpawn, portalPrefab.transform.rotation);
+                }
+                
+                //Spawn enemies
+                strongEnemyChance += 0.15f;
+
+                //Spawn First Enemy
+                int enemyIndex = DiceRoller(strongEnemyChance);
+                firstEnemySpawn = GenerateEnemySpawnPosition();
+                while(Vector3.Distance(firstEnemySpawn, player.transform.position) < 7){
+                    firstEnemySpawn = GenerateEnemySpawnPosition();
+                }
+                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+
+                //Spawn Second Enemy
+                enemyIndex = DiceRoller(strongEnemyChance);
+                secondEnemySpawn = GenerateEnemySpawnPosition();
+                while(Vector3.Distance(secondEnemySpawn, player.transform.position) < 7){
+                    secondEnemySpawn = GenerateEnemySpawnPosition();
+                }
+                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+
+
+                waveBreak = true;
+                GameObject[] leftoverItems = GameObject.FindGameObjectsWithTag("Item");
+                foreach(GameObject leftover in leftoverItems)
+                    Destroy(leftover);
+                // waveCounter += 1;
+                // waveCounterText.text = "Wave " + waveCounter;
             }
         }
 
@@ -113,12 +167,12 @@ public class WaveManager : MonoBehaviour
     }
 
     private Vector3 GeneratePortalSpawnPosition(){
-        int pointIndex = Random.Range(0,3);
+        int pointIndex = Random.Range(0,7);
         return portalSpawnPoints[pointIndex];
     }
 
     private Vector3 GenerateEnemySpawnPosition(){
-        int enemyXPoint = Random.Range(-6,6);
+        int enemyXPoint = Random.Range(-9,9);
         int enemyZPoint = Random.Range(-4,4);
         return new Vector3(enemyXPoint,2,enemyZPoint);
     }
