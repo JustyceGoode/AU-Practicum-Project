@@ -30,9 +30,9 @@ public class PlayerController : MonoBehaviour
     public static int healthPoints;
     public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
-    private int baseAttackDamage = 10;
+    private int baseAttackDamage = 15;
     public static int attackDamage;
-    private float fireRate = 0.4f;
+    private float fireRate = 0.45f;
     private float canFire = 0f;
 
     //Sound variables for bullets
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         float mouseRadian = (mouseAngle / 180) * (Mathf.PI);
         playerPointer.transform.position = transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian));
 
-        if(Input.GetMouseButtonDown(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
+        if(Input.GetMouseButton(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
             canFire = Time.time + fireRate; //Controls the fire rate
             Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             playerAudio.PlayOneShot(shootSound, 0.4f);
