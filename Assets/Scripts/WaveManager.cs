@@ -15,7 +15,7 @@ public class WaveManager : MonoBehaviour
     public GameObject medkitPrefab;
 
     //Portal spawn locations
-    public Vector3[] portalSpawnPoints = {
+    private Vector3[] portalSpawnPoints = {
         new Vector3(11,1f,5),
         new Vector3(-11,1f,5),
         new Vector3(11,1f,-5),
