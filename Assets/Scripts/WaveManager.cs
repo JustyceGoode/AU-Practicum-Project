@@ -53,14 +53,14 @@ public class WaveManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         isGameActive = true;
-        waveBreak = true;
+        waveBreak = false;
         victory = false;
         Time.timeScale = 1;
-        waveCounter = 1;
+        waveCounter = 0;
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
         scoreText.text = "Score: " + score;
-        strongEnemyChance = 0.0f;
+        strongEnemyChance = -0.15f;
     }
 
     // Update is called once per frame

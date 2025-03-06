@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI playerHpText;
     private int baseAttackDamage = 15;
     public static int attackDamage;
-    private float fireRate = 0.4f;
+    private float fireRate = 0.45f;
     private float canFire = 0f;
 
     //Sound variables for bullets
