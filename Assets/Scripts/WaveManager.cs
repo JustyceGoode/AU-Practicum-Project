@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
+    public GameObject player;
 
     //Portal spawn locations
     private Vector3[] portalSpawnPoints = {
@@ -50,6 +51,7 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         isGameActive = true;
         waveBreak = true;
         victory = false;
@@ -74,16 +76,20 @@ public class WaveManager : MonoBehaviour
         Vector3 secondPortalSpawn = new Vector3(0,0,0);;
         Vector3 thirdPortalSpawn = new Vector3(0,0,0);;
 
+        //Enemy Spawns
+        Vector3 firstEnemySpawn;
+        Vector3 secondEnemySpawn;
+
         //Update score
         scoreText.text = "Score: " + score;
 
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            // if(waveCounter == 5){
-            //     YouWin();
-            //     victory = true;
-            // }
+            if(waveCounter == 5){
+                YouWin();
+                victory = true;
+            }
 
             //Generate items before the next wave starts
             if(waveBreak && !victory){
@@ -122,11 +128,25 @@ public class WaveManager : MonoBehaviour
                 }
                 
                 //Spawn enemies
-                strongEnemyChance += 0.2f;
+                strongEnemyChance += 0.15f;
+
+                //Spawn First Enemy
                 int enemyIndex = DiceRoller(strongEnemyChance);
+                firstEnemySpawn = GenerateEnemySpawnPosition();
+                while(Vector3.Distance(firstEnemySpawn, player.transform.position) < 7){
+                    firstEnemySpawn = GenerateEnemySpawnPosition();
+                }
                 Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+
+                //Spawn Second Enemy
                 enemyIndex = DiceRoller(strongEnemyChance);
+                secondEnemySpawn = GenerateEnemySpawnPosition();
+                while(Vector3.Distance(secondEnemySpawn, player.transform.position) < 7){
+                    secondEnemySpawn = GenerateEnemySpawnPosition();
+                }
                 Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+
+
                 waveBreak = true;
                 GameObject[] leftoverItems = GameObject.FindGameObjectsWithTag("Item");
                 foreach(GameObject leftover in leftoverItems)
@@ -152,7 +172,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private Vector3 GenerateEnemySpawnPosition(){
-        int enemyXPoint = Random.Range(-6,6);
+        int enemyXPoint = Random.Range(-9,9);
         int enemyZPoint = Random.Range(-4,4);
         return new Vector3(enemyXPoint,2,enemyZPoint);
     }

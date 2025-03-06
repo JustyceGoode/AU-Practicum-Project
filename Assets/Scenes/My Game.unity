@@ -332,7 +332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499544664, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.45
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499544664, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_LocalPosition.y
@@ -340,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499544664, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.72
+      value: -4.23
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499544664, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2695,7 +2695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7711092475161407553, guid: 55aa81bdd011bea41953527b567c4e03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.44
+      value: 4.83
       objectReference: {fileID: 0}
     - target: {fileID: 7711092475161407553, guid: 55aa81bdd011bea41953527b567c4e03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2703,7 +2703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7711092475161407553, guid: 55aa81bdd011bea41953527b567c4e03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.71
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 7711092475161407553, guid: 55aa81bdd011bea41953527b567c4e03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2789,6 +2789,7 @@ MonoBehaviour:
   powerUpPrefab: {fileID: 2608510039472022943, guid: a6f4106950143e343b5187df6e9a706a, type: 3}
   healthPowerUpPrefab: {fileID: 161987364700202808, guid: 1c65d07ea100a8e41b6bb2b15fb6d36b, type: 3}
   medkitPrefab: {fileID: 996765157880489658, guid: 6c4d5d80ed60dce46ad474f4875ac0db, type: 3}
+  player: {fileID: 0}
   waveCounterText: {fileID: 694800100}
   scoreText: {fileID: 1489224473}
   gameOverText: {fileID: 105622064}
