@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
             //playerAudio.PlayOneShot(shootSound, 0.4f);
             shootVolume = SoundManager.sfxVolume;
-            Debug.Log("Shoot Volume: " + shootVolume);
+            //Debug.Log("Shoot Volume: " + shootVolume);
             playerAudio.PlayOneShot(shootSound, shootVolume);
         }
 
