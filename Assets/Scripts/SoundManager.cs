@@ -7,7 +7,9 @@ public class SoundManager : MonoBehaviour
 {
     //Game Object Variables
     private AudioSource managerAudioSource;
-    public Slider volumeSlider;
+    public Slider bgmVolumeSlider;
+    public Slider sfxVolumeSlider;
+    public static float sfxVolume;
 
     //Internal variables
     private bool muted;
@@ -20,8 +22,18 @@ public class SoundManager : MonoBehaviour
         managerAudioSource = GetComponent<AudioSource>();
 
         //Load Volume Prefs
-        if(PlayerPrefs.HasKey("musicVolume")){
-            volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        if(PlayerPrefs.HasKey("bgmVolume")){
+            bgmVolumeSlider.value = PlayerPrefs.GetFloat("bgmVolume");
+        }
+        else{
+            bgmVolumeSlider.value = 0.5f;
+        }
+
+        if(PlayerPrefs.HasKey("sfxVolume")){
+            sfxVolumeSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        }
+        else{
+            sfxVolumeSlider.value = 0.4f;
         }
 
         //Load Muted Prefs
@@ -32,6 +44,9 @@ public class SoundManager : MonoBehaviour
             else{
                 muted = false;
             }
+        }
+        else{
+            muted = false;
         }
 
         if(!muted){
@@ -45,9 +60,15 @@ public class SoundManager : MonoBehaviour
     }
 
     //Function for Volume Slider
-    public void ChangeVolume(){
-        AudioListener.volume = volumeSlider.value;
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+    public void ChangeBmgVolume(){
+        //AudioListener.volume = bgmVolumeSlider.value;
+        managerAudioSource.volume = bgmVolumeSlider.value;
+        PlayerPrefs.SetFloat("bgmVolume", bgmVolumeSlider.value);
+    }
+
+    public void ChangeSfxVolume(){
+        sfxVolume = sfxVolumeSlider.value;
+        PlayerPrefs.SetFloat("sfxVolume", sfxVolumeSlider.value);
     }
 
     //Function for Mute Button

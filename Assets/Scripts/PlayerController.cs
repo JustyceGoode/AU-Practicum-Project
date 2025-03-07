@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     //Sound variables for bullets
     public AudioClip shootSound;
     private AudioSource playerAudio;
+    private static float shootVolume;
 
     // Start is called before the first frame update
     void Start()
@@ -89,7 +90,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButton(0) && Time.time > canFire && WaveManager.isGameActive && Time.timeScale == 1){
             canFire = Time.time + fireRate; //Controls the fire rate
             Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
-            playerAudio.PlayOneShot(shootSound, 0.4f);
+            //playerAudio.PlayOneShot(shootSound, 0.4f);
+            shootVolume = SoundManager.sfxVolume;
+            //Debug.Log("Shoot Volume: " + shootVolume);
+            playerAudio.PlayOneShot(shootSound, shootVolume);
         }
 
         //Player can move while game is active

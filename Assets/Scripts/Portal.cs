@@ -40,7 +40,7 @@ public class Portal : MonoBehaviour
 
         //Whent the portal is destroyed.
         if(healthPoints <= 0){
-            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, SoundManager.sfxVolume);
             GameObject explosion = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
             Destroy(explosion, 2.0f);
             Destroy(gameObject);
