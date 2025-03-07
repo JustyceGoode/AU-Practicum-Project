@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
 
         //When the enemy is destroyed
         if(healthPoints <= 0){
-            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 0.4f);
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, SoundManager.sfxVolume);
             GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
             Destroy(explosionEffect, 2.0f);
             Destroy(gameObject);

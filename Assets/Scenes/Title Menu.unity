@@ -617,7 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca9dab99b72b0e408069fef27414de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1848836452}
+  bgmVolumeSlider: {fileID: 1848836452}
+  sfxVolumerSlider: {fileID: 0}
   soundOnIcon: {fileID: 672110204}
   soundOffIcon: {fileID: 574307327}
 --- !u!1 &237885652
@@ -3600,7 +3601,7 @@ GameObject:
   - component: {fileID: 1848836451}
   - component: {fileID: 1848836452}
   m_Layer: 5
-  m_Name: Volume Slider
+  m_Name: BGM Volume Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
