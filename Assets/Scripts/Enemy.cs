@@ -92,7 +92,6 @@ public class Enemy : MonoBehaviour
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
                 Instantiate(bulletPrefab, transform.position + new Vector3(1.25f * Mathf.Cos(lookRadian), 0, 1.25f  *Mathf.Sin(lookRadian)), Quaternion.Euler(new Vector3(0, -lookAngle, 90)));
-                //Instantiate(bulletPrefab, transform.position + new Vector3(pointerDistance*Mathf.Cos(mouseRadian), 1, pointerDistance*Mathf.Sin(mouseRadian)), Quaternion.Euler(new Vector3(0, -mouseAngle, 90)));
                 timePassed = 0f;
             }
         }
@@ -112,10 +111,12 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Player")){
-            //healthPoints -= playerAttackDamage;
             healthPoints -= PlayerController.attackDamage;
             //Debug.Log("Enemy HP: " + healthPoints);
             Destroy(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Enemy")){
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>()); //For this to work, Enemy's can't be tagged
         }
     }
 }
