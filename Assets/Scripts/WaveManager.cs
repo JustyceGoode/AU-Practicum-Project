@@ -93,8 +93,8 @@ public class WaveManager : MonoBehaviour
 
             //Generate items before the next wave starts
             if(waveBreak && !victory){
-                Instantiate(powerUpPrefab, new Vector3(3,1,0), powerUpPrefab.transform.rotation);
-                Instantiate(medkitPrefab, new Vector3(-3,1,0), medkitPrefab.transform.rotation);
+                Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
+                Instantiate(medkitPrefab, new Vector3(-3.5f,1,0), medkitPrefab.transform.rotation);
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
                 itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
