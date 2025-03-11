@@ -9,7 +9,9 @@ public class SoundManager : MonoBehaviour
     private AudioSource managerAudioSource;
     public Slider bgmVolumeSlider;
     public Slider sfxVolumeSlider;
+    
     public static float sfxVolume;
+    //public float sfxVolume;
 
     //Internal variables
     private bool muted;
