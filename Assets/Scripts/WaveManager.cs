@@ -168,9 +168,10 @@ public class WaveManager : MonoBehaviour
         if(PlayerController.healthPoints <= 0){
             GameOver();
             isGameActive = false;
+            Time.timeScale = 0;
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){
             PauseGame();
         }
     }
