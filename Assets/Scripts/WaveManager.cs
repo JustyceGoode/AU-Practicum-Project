@@ -48,6 +48,15 @@ public class WaveManager : MonoBehaviour
     public Button backToTitleButton;
     public TextMeshProUGUI youWinText;
 
+    //Settings UI
+    public Button settingsButton;
+    public TextMeshProUGUI settingsText;
+    public TextMeshProUGUI bgmText;
+    public Slider bgmSlider;
+    public TextMeshProUGUI sfxText;
+    public Slider sfxSlider;
+    public Button settingsBackButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -191,6 +200,7 @@ public class WaveManager : MonoBehaviour
     public void PauseGame(){
         pauseText.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
+        settingsButton.gameObject.SetActive(true);
         backToTitleButton.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -199,8 +209,41 @@ public class WaveManager : MonoBehaviour
     public void ContinueGame(){
         pauseText.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
+        settingsButton.gameObject.SetActive(false);
         backToTitleButton.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void OpenSettings(){
+        //Disable Pause UI
+        pauseText.gameObject.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+        settingsButton.gameObject.SetActive(false);
+        backToTitleButton.gameObject.SetActive(false);
+
+        //Enable Settings UI
+        settingsText.gameObject.SetActive(true);
+        bgmText.gameObject.SetActive(true);
+        bgmSlider.gameObject.SetActive(true);
+        sfxText.gameObject.SetActive(true);
+        sfxSlider.gameObject.SetActive(true);
+        settingsBackButton.gameObject.SetActive(true);
+    }
+
+    public void CloseSettings(){
+        //Enable Pause UI
+        pauseText.gameObject.SetActive(true);
+        continueButton.gameObject.SetActive(true);
+        settingsButton.gameObject.SetActive(true);
+        backToTitleButton.gameObject.SetActive(true);
+
+        //Disable Settings UI
+        settingsText.gameObject.SetActive(false);
+        bgmText.gameObject.SetActive(false);
+        bgmSlider.gameObject.SetActive(false);
+        sfxText.gameObject.SetActive(false);
+        sfxSlider.gameObject.SetActive(false);
+        settingsBackButton.gameObject.SetActive(false);
     }
 
     public void YouWin(){
