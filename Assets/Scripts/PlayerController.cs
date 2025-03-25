@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
     private static float shootVolume;
 
+    //Explosion particle variables
+    public ParticleSystem explosionParticle;
+    public AudioClip explosionSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -258,6 +262,14 @@ public class PlayerController : MonoBehaviour
 
         //Update player HP text
         playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+
+        //When the player is destroyed
+        if(healthPoints <= 0){
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, SoundManager.sfxVolume);
+            GameObject explosionEffect = Instantiate(explosionParticle.gameObject, transform.position, transform.rotation);
+            Destroy(explosionEffect, 2.0f);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other){

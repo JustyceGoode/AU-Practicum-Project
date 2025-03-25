@@ -46,14 +46,27 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //Direction for the enemy to follow the player
-        Vector3 followDirection = (player.transform.position - transform.position).normalized;
+        Vector3 followDirection = new Vector3(0,0,0);
+        if(WaveManager.isGameActive){
+            followDirection = (player.transform.position - transform.position).normalized;
+        }
+        //Vector3 followDirection = (player.transform.position - transform.position).normalized;
 
         //Direction for the enemy to aim at the player
-        Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
-        lookDirection = lookDirection.normalized;
+        Vector2 lookDirection = new Vector2(0,0);
+        if(WaveManager.isGameActive){
+            lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
+            lookDirection = lookDirection.normalized;
+        }
+        // Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
+        // lookDirection = lookDirection.normalized;
 
         //Have the enemy follow the player at a distance
-        float dist = Vector3.Distance(transform.position, player.transform.position);
+        float dist = 0;
+        if(WaveManager.isGameActive){
+            dist = Vector3.Distance(transform.position, player.transform.position);
+        }
+        //float dist = Vector3.Distance(transform.position, player.transform.position);
 
         if(dist > 3.25f){
             //enemyRb.AddForce(followDirection * speed);

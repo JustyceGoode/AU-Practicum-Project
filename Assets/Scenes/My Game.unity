@@ -468,6 +468,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7454578394929304622, guid: 4a66066fbbb882146af18083eccf82ea, type: 3}
   playerHpText: {fileID: 2057035470}
   shootSound: {fileID: 8300000, guid: b69b777791729bc479ff6bc7bff5e548, type: 3}
+  explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
+  explosionSound: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
 --- !u!54 &114474586
 Rigidbody:
   m_ObjectHideFlags: 0
