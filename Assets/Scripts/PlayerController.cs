@@ -79,13 +79,28 @@ public class PlayerController : MonoBehaviour
         }
 
         //Gun looks at mouse
-        Vector3 mousePositionScreen = Input.mousePosition;
-        mousePositionScreen.z = Camera.main.transform.position.y - 1;
-        Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
+        Vector3 mousePositionScreen = new Vector3(0,0,0);
+        Vector3 mousePositionWorld = new Vector3(0,0,0);
+        Vector2 direction = new Vector2(0, 0);
+        float mouseAngle = 0;
 
-        Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
-        float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
-        transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
+        // Vector3 mousePositionScreen = Input.mousePosition;
+        // mousePositionScreen.z = Camera.main.transform.position.y - 1;
+        // Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
+
+        // Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
+        // float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
+        // transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
+
+        if(WaveManager.isGameActive){
+            mousePositionScreen = Input.mousePosition;
+            mousePositionScreen.z = Camera.main.transform.position.y - 1;
+            mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
+
+            direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
+            mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
+            transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
+        }
         
         //Spawns bullet away from player
         float mouseRadian = (mouseAngle / 180) * (Mathf.PI);
@@ -270,6 +285,9 @@ public class PlayerController : MonoBehaviour
             Destroy(explosionEffect, 2.0f);
             Destroy(gameObject);
         }
+
+        // playerRb.freezeRotation = !WaveManager.isGameActive;
+        // Debug.Log(!WaveManager.isGameActive);
     }
 
     private void OnTriggerEnter(Collider other){
