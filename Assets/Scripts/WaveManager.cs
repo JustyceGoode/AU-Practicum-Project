@@ -38,6 +38,7 @@ public class WaveManager : MonoBehaviour
     //private int itemCount;
     private bool waveBreak;
     private bool victory;
+    public TextMeshProUGUI itemSelectionText;
 
     //UI variables
     public TextMeshProUGUI gameOverText;
@@ -107,12 +108,14 @@ public class WaveManager : MonoBehaviour
                 Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
                 itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
+                itemSelectionText.gameObject.SetActive(true);
             }
 
             //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
             if(itemCount <= 1 && !victory){
                 waveCounter += 1;
                 waveCounterText.text = "Wave " + waveCounter;
+                itemSelectionText.gameObject.SetActive(false);
 
                 //Spawn first portal
                 firstPortalSpawn = GeneratePortalSpawnPosition();
