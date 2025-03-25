@@ -93,7 +93,7 @@ public class WaveManager : MonoBehaviour
         //Update score
         scoreText.text = "Score: " + score;
 
-        Debug.Log(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5);
+        //Debug.Log(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5);
 
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
@@ -181,8 +181,6 @@ public class WaveManager : MonoBehaviour
 
         if(PlayerController.healthPoints <= 0){
             GameOver();
-            isGameActive = false;
-            Time.timeScale = 0;
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){
@@ -202,13 +200,16 @@ public class WaveManager : MonoBehaviour
     }
 
     public void GameOver(){
+        isGameActive = false;
+        //Time.timeScale = 0;
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         backToTitleButton.gameObject.SetActive(true);
     }
 
     public void RestartGame(){
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
+        isGameActive = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -217,7 +218,8 @@ public class WaveManager : MonoBehaviour
         continueButton.gameObject.SetActive(true);
         settingsButton.gameObject.SetActive(true);
         backToTitleButton.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        isGameActive = false;
     }
 
     //Continue Game after pausing
@@ -226,7 +228,8 @@ public class WaveManager : MonoBehaviour
         continueButton.gameObject.SetActive(false);
         settingsButton.gameObject.SetActive(false);
         backToTitleButton.gameObject.SetActive(false);
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
+        isGameActive = true;
     }
 
     public void OpenSettings(){
@@ -262,7 +265,8 @@ public class WaveManager : MonoBehaviour
     }
 
     public void YouWin(){
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        isGameActive = false;
         youWinText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         backToTitleButton.gameObject.SetActive(true);
