@@ -107,9 +107,9 @@ public class WaveManager : MonoBehaviour
             if(waveBreak && !victory){
 
                 if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5){
-                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,-5), powerUpPrefab.transform.rotation);
-                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,-5), medkitPrefab.transform.rotation);
-                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,-5), healthPowerUpPrefab.transform.rotation);
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,6), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,6), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,6), healthPowerUpPrefab.transform.rotation);
                 }
                 else{
                     Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
@@ -183,7 +183,11 @@ public class WaveManager : MonoBehaviour
             GameOver();
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){
+        // if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){
+        //     PauseGame();
+        // }
+
+        if(Input.GetKeyDown(KeyCode.Escape) && isGameActive){
             PauseGame();
         }
     }
@@ -220,6 +224,7 @@ public class WaveManager : MonoBehaviour
         backToTitleButton.gameObject.SetActive(true);
         //Time.timeScale = 0;
         isGameActive = false;
+        //PlayerController.playerRb.freezeRotation = true;
     }
 
     //Continue Game after pausing
@@ -230,6 +235,7 @@ public class WaveManager : MonoBehaviour
         backToTitleButton.gameObject.SetActive(false);
         //Time.timeScale = 1;
         isGameActive = true;
+        //PlayerController.playerRb.freezeRotation = false;
     }
 
     public void OpenSettings(){
