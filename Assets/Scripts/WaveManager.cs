@@ -13,7 +13,7 @@ public class WaveManager : MonoBehaviour
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
-    public GameObject player;
+    private GameObject player;
 
     //Portal spawn locations
     private Vector3[] portalSpawnPoints = {
@@ -38,6 +38,7 @@ public class WaveManager : MonoBehaviour
     //private int itemCount;
     private bool waveBreak;
     private bool victory;
+    public TextMeshProUGUI itemSelectionText;
 
     //UI variables
     public TextMeshProUGUI gameOverText;
@@ -92,6 +93,8 @@ public class WaveManager : MonoBehaviour
         //Update score
         scoreText.text = "Score: " + score;
 
+        Debug.Log(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5);
+
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
@@ -102,17 +105,28 @@ public class WaveManager : MonoBehaviour
 
             //Generate items before the next wave starts
             if(waveBreak && !victory){
-                Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
-                Instantiate(medkitPrefab, new Vector3(-3.5f,1,0), medkitPrefab.transform.rotation);
-                Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
+
+                if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5){
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,-5), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,-5), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,-5), healthPowerUpPrefab.transform.rotation);
+                }
+                else{
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,0), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
+                }
+                
                 itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
+                itemSelectionText.gameObject.SetActive(true);
             }
 
             //Start next wave after items are picked. I'm allowing the player to ignore the medkit for 2 power ups.
             if(itemCount <= 1 && !victory){
                 waveCounter += 1;
                 waveCounterText.text = "Wave " + waveCounter;
+                itemSelectionText.gameObject.SetActive(false);
 
                 //Spawn first portal
                 firstPortalSpawn = GeneratePortalSpawnPosition();
