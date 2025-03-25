@@ -13,7 +13,7 @@ public class WaveManager : MonoBehaviour
     public GameObject powerUpPrefab;
     public GameObject healthPowerUpPrefab;
     public GameObject medkitPrefab;
-    public GameObject player;
+    private GameObject player;
 
     //Portal spawn locations
     private Vector3[] portalSpawnPoints = {
@@ -93,6 +93,8 @@ public class WaveManager : MonoBehaviour
         //Update score
         scoreText.text = "Score: " + score;
 
+        Debug.Log(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5);
+
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
@@ -103,9 +105,18 @@ public class WaveManager : MonoBehaviour
 
             //Generate items before the next wave starts
             if(waveBreak && !victory){
-                Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
-                Instantiate(medkitPrefab, new Vector3(-3.5f,1,0), medkitPrefab.transform.rotation);
-                Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
+
+                if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5){
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,-5), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,-5), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,-5), healthPowerUpPrefab.transform.rotation);
+                }
+                else{
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,0), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,0), healthPowerUpPrefab.transform.rotation);
+                }
+                
                 itemCount = FindObjectsOfType<Item>().Length; //This line is necessary so that the enemies don't spawn immediately.
                 waveBreak = false;
                 itemSelectionText.gameObject.SetActive(true);
