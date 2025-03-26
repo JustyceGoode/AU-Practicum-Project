@@ -106,7 +106,7 @@ public class WaveManager : MonoBehaviour
             //Generate items before the next wave starts
             if(waveBreak && !victory){
 
-                if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5){
+                if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5f){
                     Instantiate(powerUpPrefab, new Vector3(3.5f,1,6), powerUpPrefab.transform.rotation);
                     Instantiate(medkitPrefab, new Vector3(-3.5f,1,6), medkitPrefab.transform.rotation);
                     Instantiate(healthPowerUpPrefab, new Vector3(0,1,6), healthPowerUpPrefab.transform.rotation);
