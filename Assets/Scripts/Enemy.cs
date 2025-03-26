@@ -19,12 +19,17 @@ public class Enemy : MonoBehaviour
     private float timePassed = 0f;
 
     //Enemy stats
-    //TODO Balance enemy stats
     public int healthPoints;
     public int EnemyId;
     public static int damage;
     public static int scorePoints;
-    //private int playerAttackDamage; //I'm making this a seperate variable because PlayerController.attackDamage doesn't work for damage;
+
+    //Enemy Direction
+    Vector3 followDirection = new Vector3(0,0,0); //Direction that the enemy follows the player
+    Vector2 lookDirection = new Vector2(0,0); //Direction that the enemy looks at the player
+    float lookAngle = 0;
+    float lookRadian = 0;
+    float dist = 0; //Distance between enemy and player
 
     //Explosion particle variables
     public ParticleSystem explosionParticle;
@@ -45,69 +50,77 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Direction for the enemy to follow the player
-        Vector3 followDirection = new Vector3(0,0,0);
+        //This code will be ignored when the player is destroyed.
         if(WaveManager.isGameActive){
             followDirection = (player.transform.position - transform.position).normalized;
-        }
-        //Vector3 followDirection = (player.transform.position - transform.position).normalized;
-
-        //Direction for the enemy to aim at the player
-        Vector2 lookDirection = new Vector2(0,0);
-        if(WaveManager.isGameActive){
             lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
             lookDirection = lookDirection.normalized;
-        }
-        // Vector2 lookDirection = new Vector2(player.transform.position.x, player.transform.position.z) - new Vector2(transform.position.x, transform.position.z);
-        // lookDirection = lookDirection.normalized;
 
-        //Have the enemy follow the player at a distance
-        float dist = 0;
-        if(WaveManager.isGameActive){
-            dist = Vector3.Distance(transform.position, player.transform.position);
-        }
-        //float dist = Vector3.Distance(transform.position, player.transform.position);
+            lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
+            transform.eulerAngles = new Vector3 (0, -lookAngle, 0);
+            lookRadian = (lookAngle / 180) * (Mathf.PI);
 
-        if(dist > 3.25f){
-            //enemyRb.AddForce(followDirection * speed);
-            //Vector3 movement = followDirection * speed;
-            enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-        }
-        else if(dist < 2.75f){
-            //enemyRb.AddForce(-followDirection * speed);
-            //Vector3 movement = followDirection * speed;
-            enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-        }
-
-        //Keep enemy in bounds
-        if(transform.position.x > xBoundary){
-            transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
-        }
-        if(transform.position.x < -xBoundary){
-            transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
-        }
-        if(transform.position.z > zBoundary){
-            transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
-        }
-        if(transform.position.z < -zBoundary){
-            transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
-        }
-
-        //enemyWheelRb.AddForce(followDirection * speed);
-        //enemyGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
-
-        float lookAngle = Vector2.SignedAngle(Vector2.right, lookDirection);
-        transform.eulerAngles = new Vector3 (0, -lookAngle, 0);
-        float lookRadian = (lookAngle / 180) * (Mathf.PI);
-
-        //Shoot bullets while the game is active
-        if(WaveManager.isGameActive){
             timePassed += Time.deltaTime;
             if(timePassed > 2f){
                 Instantiate(bulletPrefab, transform.position + new Vector3(1.25f * Mathf.Cos(lookRadian), 0, 1.25f  *Mathf.Sin(lookRadian)), Quaternion.Euler(new Vector3(0, -lookAngle, 90)));
                 timePassed = 0f;
             }
+
+            dist = Vector3.Distance(transform.position, player.transform.position);
+
+            if(dist > 3.25f){
+                //enemyRb.AddForce(followDirection * speed);
+                //Vector3 movement = followDirection * speed;
+                enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            }
+            else if(dist < 2.75f){
+                //enemyRb.AddForce(-followDirection * speed);
+                //Vector3 movement = followDirection * speed;
+                enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            }
+
+            //Keep enemy in bounds
+            if(transform.position.x > xBoundary){
+                transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+            }
+            if(transform.position.x < -xBoundary){
+                transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+            }
+            if(transform.position.z > zBoundary){
+                transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
+            }
+            if(transform.position.z < -zBoundary){
+                transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
+            }
         }
+
+        // if(dist > 3.25f){
+        //     //enemyRb.AddForce(followDirection * speed);
+        //     //Vector3 movement = followDirection * speed;
+        //     enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+        // }
+        // else if(dist < 2.75f){
+        //     //enemyRb.AddForce(-followDirection * speed);
+        //     //Vector3 movement = followDirection * speed;
+        //     enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+        // }
+
+        // //Keep enemy in bounds
+        // if(transform.position.x > xBoundary){
+        //     transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        // }
+        // if(transform.position.x < -xBoundary){
+        //     transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+        // }
+        // if(transform.position.z > zBoundary){
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
+        // }
+        // if(transform.position.z < -zBoundary){
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
+        // }
+
+        //enemyWheelRb.AddForce(followDirection * speed);
+        //enemyGun.transform.position = transform.position + new Vector3(0,0.5f,0); //Gun follows enemy
         
         //To update the damage from the power up
         //playerAttackDamage = PlayerController.attackDamage; 
