@@ -35,6 +35,12 @@ public class PlayerController : MonoBehaviour
     private float fireRate = 0.45f;
     private float canFire = 0f;
 
+    //Player direction
+    Vector3 mousePositionScreen = new Vector3(0,0,0);
+    Vector3 mousePositionWorld = new Vector3(0,0,0);
+    Vector2 direction = new Vector2(0, 0);
+    float mouseAngle = 0;
+
     //Sound variables for bullets
     public AudioClip shootSound;
     private AudioSource playerAudio;
@@ -78,20 +84,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
 
-        //Gun looks at mouse
-        Vector3 mousePositionScreen = new Vector3(0,0,0);
-        Vector3 mousePositionWorld = new Vector3(0,0,0);
-        Vector2 direction = new Vector2(0, 0);
-        float mouseAngle = 0;
-
-        // Vector3 mousePositionScreen = Input.mousePosition;
-        // mousePositionScreen.z = Camera.main.transform.position.y - 1;
-        // Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
-
-        // Vector2 direction = new Vector2(mousePositionWorld.x, mousePositionWorld.z) - new Vector2(transform.position.x, transform.position.z);
-        // float mouseAngle = Vector2.SignedAngle(Vector2.right, direction);
-        // transform.eulerAngles = new Vector3 (0, -mouseAngle + 90, 0);
-
+        //Prevents the player from rotating while the game is paused
         if(WaveManager.isGameActive){
             mousePositionScreen = Input.mousePosition;
             mousePositionScreen.z = Camera.main.transform.position.y - 1;
@@ -286,7 +279,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // playerRb.freezeRotation = !WaveManager.isGameActive;
+        playerRb.freezeRotation = !WaveManager.isGameActive; //So that the player doesn't get knocked over while the game is paused
         // Debug.Log(!WaveManager.isGameActive);
     }
 
