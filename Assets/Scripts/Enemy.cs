@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
         //EnemyId is a public, non-static variable, so it can be modified in the Unity interface but can't be used to modify variables in other programs.
         //A non-static variable has to be assigned to a static variable in the start function.
         damage = EnemyId * 5 + 10;
+        //damage = 0;
         scorePoints = EnemyId * 10 + 10;
     }
 
