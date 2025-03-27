@@ -30,11 +30,12 @@ public class WaveManager : MonoBehaviour
     private int waveCounter;
     public TextMeshProUGUI waveCounterText;
     public static float strongEnemyChance; //Probabilty for stronger enemies to spawn
+    public static bool endless = false;
 
     //Score tracking variables
     public static int score;
     public TextMeshProUGUI scoreText;
-    private int highScore;
+    public static int highScore;
     public TextMeshProUGUI highScoreText;
 
     //private int itemCount;
@@ -73,13 +74,15 @@ public class WaveManager : MonoBehaviour
         score = 0;
         scoreText.text = "Score: " + score;
 
-        if(PlayerPrefs.HasKey("highScore")){
-            highScore = PlayerPrefs.GetInt("highScore");
-        }
-        else{
-            highScore = 0;
-        }
-        highScoreText.text = "High Score: " + highScore;
+        // highScoreText.gameObject.SetActive(endless);
+
+        // if(PlayerPrefs.HasKey("highScore")){
+        //     highScore = PlayerPrefs.GetInt("highScore");
+        // }
+        // else{
+        //     highScore = 0;
+        // }
+        // highScoreText.text = "High Score: " + highScore;
 
         strongEnemyChance = -0.15f;
     }
@@ -94,8 +97,9 @@ public class WaveManager : MonoBehaviour
 
         //Portal Spawns
         Vector3 firstPortalSpawn = new Vector3(0,0,0);
-        Vector3 secondPortalSpawn = new Vector3(0,0,0);;
-        Vector3 thirdPortalSpawn = new Vector3(0,0,0);;
+        Vector3 secondPortalSpawn = new Vector3(0,0,0);
+        Vector3 thirdPortalSpawn = new Vector3(0,0,0);
+        Vector3 fourthPortalSpawn = new Vector3(0,0,0);
 
         //Enemy Spawns
         Vector3 firstEnemySpawn;
@@ -109,9 +113,9 @@ public class WaveManager : MonoBehaviour
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            if(waveCounter == 5){
+            if(waveCounter == 5 && !endless){
                 YouWin();
-                UpdateHighScore();
+                //UpdateHighScore();
                 victory = true;
             }
 
@@ -161,6 +165,14 @@ public class WaveManager : MonoBehaviour
                     }
                     Instantiate(portalPrefab, thirdPortalSpawn, portalPrefab.transform.rotation);
                 }
+
+                if(waveCounter >= 7){
+                    fourthPortalSpawn = GeneratePortalSpawnPosition();
+                    while(thirdPortalSpawn == firstPortalSpawn || thirdPortalSpawn == secondPortalSpawn || fourthPortalSpawn == thirdPortalSpawn){
+                        fourthPortalSpawn = GeneratePortalSpawnPosition();
+                    }
+                    Instantiate(portalPrefab, fourthPortalSpawn, portalPrefab.transform.rotation);
+                }
                 
                 //Spawn enemies
                 strongEnemyChance += 0.15f;
@@ -193,7 +205,9 @@ public class WaveManager : MonoBehaviour
 
         if(PlayerController.healthPoints <= 0){
             GameOver();
-            UpdateHighScore();
+            if(endless){
+                UpdateHighScore();
+            }
         }
 
         // if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){

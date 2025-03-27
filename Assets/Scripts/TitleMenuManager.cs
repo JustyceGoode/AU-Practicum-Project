@@ -7,10 +7,13 @@ using UnityEngine.UI;
 
 public class TitleMenuManager : MonoBehaviour
 {
+    public TextMeshProUGUI highScoreText;
+
     //Title Menu UI
     public TextMeshProUGUI titleText;
     public Button settingsButton;
     public Button startGameButton;
+    public Button endlessModeButton;
     public Button controlMenuButton;
     public Button exitGameButton;
 
@@ -36,9 +39,30 @@ public class TitleMenuManager : MonoBehaviour
     public Slider sfxSlider;
     public Button settingsBackButton;
 
+    void Start(){
+        if(PlayerPrefs.HasKey("highScore")){
+            WaveManager.highScore = PlayerPrefs.GetInt("highScore");
+        }
+        else{
+            WaveManager.highScore = 0;
+        }
+        highScoreText.text = "Endless Mode\nHigh Score: " + WaveManager.highScore;
+
+        //WaveManager.highScore = 0;
+        //PlayerPrefs.SetInt("highScore", WaveManager.highScore);
+        //highScoreText.text = "High Score: " + WaveManager.highScore;
+    }
+
     public void StartGame(){
         SceneManager.LoadScene("My Game");
-        Time.timeScale = 1;
+        WaveManager.isGameActive = true;
+        WaveManager.endless = false;
+    }
+    
+    public void EndlessMode(){
+        SceneManager.LoadScene("My Game");
+        WaveManager.isGameActive = true;
+        WaveManager.endless = true;
     }
 
     public void OpenControlsMenu(){
