@@ -11,6 +11,7 @@ public class TitleMenuManager : MonoBehaviour
     public TextMeshProUGUI titleText;
     public Button settingsButton;
     public Button startGameButton;
+    public Button endlessModeButton;
     public Button controlMenuButton;
     public Button exitGameButton;
 
@@ -38,7 +39,14 @@ public class TitleMenuManager : MonoBehaviour
 
     public void StartGame(){
         SceneManager.LoadScene("My Game");
-        Time.timeScale = 1;
+        WaveManager.isGameActive = true;
+        WaveManager.endless = false;
+    }
+    
+    public void EndlessMode(){
+        SceneManager.LoadScene("My Game");
+        WaveManager.isGameActive = true;
+        WaveManager.endless = true;
     }
 
     public void OpenControlsMenu(){

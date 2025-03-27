@@ -30,6 +30,7 @@ public class WaveManager : MonoBehaviour
     private int waveCounter;
     public TextMeshProUGUI waveCounterText;
     public static float strongEnemyChance; //Probabilty for stronger enemies to spawn
+    public static bool endless = false;
 
     //Score tracking variables
     public static int score;
@@ -109,7 +110,7 @@ public class WaveManager : MonoBehaviour
         //When all of the portals are destroyed and no enemies are on the field
         if(enemyCount == 0 && portalCount == 0){
 
-            if(waveCounter == 5){
+            if(waveCounter == 3 && !endless){
                 YouWin();
                 UpdateHighScore();
                 victory = true;
