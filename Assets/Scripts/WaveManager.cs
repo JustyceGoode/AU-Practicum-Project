@@ -34,6 +34,8 @@ public class WaveManager : MonoBehaviour
     //Score tracking variables
     public static int score;
     public TextMeshProUGUI scoreText;
+    private int highScore;
+    public TextMeshProUGUI highScoreText;
 
     //private int itemCount;
     private bool waveBreak;
@@ -70,6 +72,15 @@ public class WaveManager : MonoBehaviour
         waveCounterText.text = "Wave " + waveCounter;
         score = 0;
         scoreText.text = "Score: " + score;
+
+        if(PlayerPrefs.HasKey("highScore")){
+            highScore = PlayerPrefs.GetInt("highScore");
+        }
+        else{
+            highScore = 0;
+        }
+        highScoreText.text = "High Score: " + highScore;
+
         strongEnemyChance = -0.15f;
     }
 
@@ -100,6 +111,7 @@ public class WaveManager : MonoBehaviour
 
             if(waveCounter == 5){
                 YouWin();
+                UpdateHighScore();
                 victory = true;
             }
 
@@ -181,6 +193,7 @@ public class WaveManager : MonoBehaviour
 
         if(PlayerController.healthPoints <= 0){
             GameOver();
+            UpdateHighScore();
         }
 
         // if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0){
@@ -289,6 +302,14 @@ public class WaveManager : MonoBehaviour
         }
         else{
             return 0;
+        }
+    }
+
+    private void UpdateHighScore(){
+        if(score > highScore){
+            highScore = score;
+            PlayerPrefs.SetInt("highScore", highScore);
+            highScoreText.text = "High Score: " + highScore;
         }
     }
 }
