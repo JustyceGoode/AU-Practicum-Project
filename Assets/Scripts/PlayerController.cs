@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public static int healthPoints;
     public static int maxHealthPoints;
     public TextMeshProUGUI playerHpText;
+    public Slider playerHealthBar;
     private int baseAttackDamage = 15;
     public static int attackDamage;
     private float fireRate = 0.45f;
@@ -270,6 +272,9 @@ public class PlayerController : MonoBehaviour
 
         //Update player HP text
         playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        playerHealthBar.maxValue = maxHealthPoints;
+        //Debug.Log("Player Health Bar: " + healthPoints);
+        playerHealthBar.value = healthPoints;
 
         //When the player is destroyed
         if(healthPoints <= 0){
@@ -286,6 +291,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
             healthPoints -= Enemy.damage;
+            //Debug.Log("Player Health Bar: " + healthPoints);
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){
