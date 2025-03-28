@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         healthPoints = baseHealthPoints;
         maxHealthPoints = baseHealthPoints;
         attackDamage = baseAttackDamage;
-        playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
         //mouseAngle = 0f;
     }
 
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Update player HP text
-        playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
+        //playerHpText.text = "Player HP: " + healthPoints + " / " + maxHealthPoints;
         playerHealthBar.maxValue = maxHealthPoints;
         //Debug.Log("Player Health Bar: " + healthPoints);
         playerHealthBar.value = healthPoints;
