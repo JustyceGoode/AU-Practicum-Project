@@ -16,7 +16,10 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        if(WaveManager.isGameActive){
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        }
+        //transform.Translate(Vector3.up * speed * Time.deltaTime);
 
         if(transform.position.x > boundary || transform.position.x < -boundary){
             Destroy(gameObject);
