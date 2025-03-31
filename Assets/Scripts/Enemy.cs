@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
 
+    public UnityEngine.AI.NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,16 +71,18 @@ public class Enemy : MonoBehaviour
 
             dist = Vector3.Distance(transform.position, player.transform.position);
 
-            if(dist > 3.25f){
-                //enemyRb.AddForce(followDirection * speed);
-                //Vector3 movement = followDirection * speed;
-                enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-            }
-            else if(dist < 2.75f){
-                //enemyRb.AddForce(-followDirection * speed);
-                //Vector3 movement = followDirection * speed;
-                enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-            }
+            agent.SetDestination(player.transform.position);
+
+            // if(dist > 3.25f){
+            //     //enemyRb.AddForce(followDirection * speed);
+            //     //Vector3 movement = followDirection * speed;
+            //     enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            // }
+            // else if(dist < 2.75f){
+            //     //enemyRb.AddForce(-followDirection * speed);
+            //     //Vector3 movement = followDirection * speed;
+            //     enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            // }
 
             //Keep enemy in bounds
             if(transform.position.x > xBoundary){
