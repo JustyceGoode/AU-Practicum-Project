@@ -183,7 +183,7 @@ public class WaveManager : MonoBehaviour
                 while(Vector3.Distance(firstEnemySpawn, player.transform.position) < 7){
                     firstEnemySpawn = GenerateEnemySpawnPosition();
                 }
-                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+                //Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
 
                 //Spawn Second Enemy
                 enemyIndex = DiceRoller(strongEnemyChance);
@@ -191,7 +191,7 @@ public class WaveManager : MonoBehaviour
                 while(Vector3.Distance(secondEnemySpawn, player.transform.position) < 7){
                     secondEnemySpawn = GenerateEnemySpawnPosition();
                 }
-                Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
+                //Instantiate(enemyPrefabs[enemyIndex], GenerateEnemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
 
 
                 waveBreak = true;
