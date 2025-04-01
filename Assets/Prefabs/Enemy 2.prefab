@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 5583631455030046955}
   - component: {fileID: 8502994113258404822}
   - component: {fileID: 5008231674228941919}
+  - component: {fileID: 889986059768475358}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Untagged
@@ -388,6 +389,7 @@ MonoBehaviour:
   EnemyId: 1
   explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
   explosionSound: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
+  agent: {fileID: 889986059768475358}
 --- !u!54 &8502994113258404822
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -436,6 +438,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0.02, z: 0}
+--- !u!195 &889986059768475358
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755928709551698021}
+  m_Enabled: 1
+  m_AgentTypeID: 1479372276
+  m_Radius: 0.1
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 3.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6754629637155096924
 GameObject:
   m_ObjectHideFlags: 0
