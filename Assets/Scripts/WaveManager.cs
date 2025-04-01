@@ -23,8 +23,8 @@ public class WaveManager : MonoBehaviour
         new Vector3(-11,1,-7),
         new Vector3(11,1,0),
         new Vector3(-11,1,0),
-        new Vector3(0,1,7),
-        new Vector3(0,1,-7),
+        //new Vector3(0,1,7),
+        //new Vector3(0,1,-7),
     };
 
     private int waveCounter;
@@ -123,9 +123,9 @@ public class WaveManager : MonoBehaviour
             if(waveBreak && !victory){
 
                 if(Mathf.Abs(player.transform.position.x) <= 7 && Mathf.Abs(player.transform.position.z) <= 3.5f){
-                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,6), powerUpPrefab.transform.rotation);
-                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,6), medkitPrefab.transform.rotation);
-                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,6), healthPowerUpPrefab.transform.rotation);
+                    Instantiate(powerUpPrefab, new Vector3(3.5f,1,7.25f), powerUpPrefab.transform.rotation);
+                    Instantiate(medkitPrefab, new Vector3(-3.5f,1,7.25f), medkitPrefab.transform.rotation);
+                    Instantiate(healthPowerUpPrefab, new Vector3(0,1,7.25f), healthPowerUpPrefab.transform.rotation);
                 }
                 else{
                     Instantiate(powerUpPrefab, new Vector3(3.5f,1,0), powerUpPrefab.transform.rotation);
@@ -220,7 +220,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private Vector3 GeneratePortalSpawnPosition(){
-        int pointIndex = Random.Range(0,7);
+        int pointIndex = Random.Range(0,5);
         return portalSpawnPoints[pointIndex];
     }
 

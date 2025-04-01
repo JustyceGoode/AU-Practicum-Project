@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     //public GameObject enemyGun;
 
     //Enemy movement variables
-    private float speed = 1.0f;
+    //private float speed = 1.0f;
     private Rigidbody enemyRb;
     public GameObject player;
     private int xBoundary = 15;

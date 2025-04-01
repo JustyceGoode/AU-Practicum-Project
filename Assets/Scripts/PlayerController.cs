@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerRb;
-    private float speed = 4.5f; //Old: 2.0f
+    private float speed = 6f; //Old: 2.0f
 
     //World Boundary
     private int xBoundary = 20;
