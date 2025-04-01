@@ -17,12 +17,12 @@ public class WaveManager : MonoBehaviour
 
     //Portal spawn locations
     private Vector3[] portalSpawnPoints = {
-        new Vector3(11,1,7),
-        new Vector3(-11,1,7),
-        new Vector3(11,1,-7),
-        new Vector3(-11,1,-7),
-        new Vector3(11,1,0),
-        new Vector3(-11,1,0),
+        new Vector3(11,0.5f,7),
+        new Vector3(-11,0.5f,7),
+        new Vector3(11,0.5f,-7),
+        new Vector3(-11,0.5f,-7),
+        new Vector3(11,0.5f,0),
+        new Vector3(-11,0.5f,0),
         //new Vector3(0,1,7),
         //new Vector3(0,1,-7),
     };
