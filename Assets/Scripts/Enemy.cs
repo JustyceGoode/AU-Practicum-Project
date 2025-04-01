@@ -71,6 +71,9 @@ public class Enemy : MonoBehaviour
 
             dist = Vector3.Distance(transform.position, player.transform.position);
 
+            // if(dist > 5.0f){
+            //     agent.SetDestination(player.transform.position);
+            // }
             agent.SetDestination(player.transform.position);
 
             // if(dist > 3.25f){
@@ -144,6 +147,7 @@ public class Enemy : MonoBehaviour
         if(other.gameObject.CompareTag("Player")){
             healthPoints -= PlayerController.attackDamage;
             //Debug.Log("Enemy HP: " + healthPoints);
+            //Debug.Log("Enemy Collision Detected");
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Enemy")){

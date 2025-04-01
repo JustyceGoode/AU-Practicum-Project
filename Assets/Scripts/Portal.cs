@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour
             if(timePassed > 5f){
                 //Debug.Log("Strong Enemy Chance: " + WaveManager.strongEnemyChance);
                 int enemyIndex = DiceRoller(WaveManager.strongEnemyChance);
-                //Instantiate(enemyPrefabs[enemyIndex], transform.position + new Vector3(0,3f,0), enemyPrefabs[enemyIndex].transform.rotation);
+                Instantiate(enemyPrefabs[enemyIndex], transform.position + new Vector3(0,3f,0), enemyPrefabs[enemyIndex].transform.rotation);
                 timePassed = 0f;
             }
         }

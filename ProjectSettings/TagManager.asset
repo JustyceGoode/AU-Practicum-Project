@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Medkit
   - Health Power Up
+  - Box
   layers:
   - Default
   - TransparentFX
