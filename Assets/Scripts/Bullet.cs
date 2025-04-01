@@ -31,8 +31,11 @@ public class Bullet : MonoBehaviour
 
     }
 
-    // private void OnTriggerEnter(Collider other){
-    //     other.healthPoints -= 10f;
-    //     Destroy(gameObject);
-    // }
+    private void OnTriggerEnter(Collider other){
+        //Debug.Log("Collision detected");
+        if(other.gameObject.CompareTag("Box")){
+            //Debug.Log("Collision detected");
+            Destroy(gameObject);
+        }
+    }
 }
