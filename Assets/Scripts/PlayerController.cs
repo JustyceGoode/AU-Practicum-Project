@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 6f; //Old: 2.0f
 
     //World Boundary
-    private int xBoundary = 20;
-    private int zBoundary = 10;
+    private int xBoundary = 23;
+    private int zBoundary = 14;
 
     //Bullets
     public GameObject bulletPrefab;
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
     //Explosion particle variables
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
-
-    //TODO: Fix bug where player gets stuck on Nav Walls
 
     // Start is called before the first frame update
     void Start()
@@ -292,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
-            healthPoints -= Enemy.damage;
+            //healthPoints -= Enemy.damage;
             //Debug.Log("Player Health Bar: " + healthPoints);
             //Debug.Log("Player Collision Detected");
             Destroy(other.gameObject);
