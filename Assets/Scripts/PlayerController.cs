@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
 
+    //TODO: Fix bug where player gets stuck on Nav Walls
+
     // Start is called before the first frame update
     void Start()
     {
