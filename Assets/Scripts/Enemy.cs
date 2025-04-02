@@ -71,9 +71,6 @@ public class Enemy : MonoBehaviour
 
             dist = Vector3.Distance(transform.position, player.transform.position);
 
-            // if(dist > 5.0f){
-            //     agent.SetDestination(player.transform.position);
-            // }
             agent.SetDestination(player.transform.position);
 
             // if(dist > 3.25f){
@@ -100,6 +97,10 @@ public class Enemy : MonoBehaviour
             if(transform.position.z < -zBoundary){
                 transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
             }
+        }
+        else{
+            agent.ResetPath();
+            //Debug.Log("Game is paused");
         }
 
         // if(dist > 3.25f){
