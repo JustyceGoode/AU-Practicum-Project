@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Enemy")){
-            //healthPoints -= Enemy.damage;
+            healthPoints -= Enemy.damage;
             //Debug.Log("Player Health Bar: " + healthPoints);
             //Debug.Log("Player Collision Detected");
             Destroy(other.gameObject);
