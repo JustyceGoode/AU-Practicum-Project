@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1819431640297733956}
   - component: {fileID: 6400380044275540624}
   - component: {fileID: 3497080010465980855}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1007072277096417435}
   - component: {fileID: 7959062542079585327}
   - component: {fileID: 5677022176885137861}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: guns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1970506610485815343}
   - component: {fileID: 3962800933471921032}
   - component: {fileID: 6738058537100197509}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: axle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,8 @@ GameObject:
   - component: {fileID: 6824819613527523681}
   - component: {fileID: 140016078577085286}
   - component: {fileID: 6429197384722758906}
-  m_Layer: 0
+  - component: {fileID: 2904133524687268773}
+  m_Layer: 8
   m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,6 +306,8 @@ MonoBehaviour:
   EnemyId: 0
   explosionParticle: {fileID: 1260722184122166519, guid: 59ff30d1aac5d3942834119f609801cc, type: 3}
   explosionSound: {fileID: 8300000, guid: 3ef448c261956ce4886554ab03d145dd, type: 3}
+  agent: {fileID: 2904133524687268773}
+  offset: 0
 --- !u!54 &140016078577085286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -353,6 +356,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0.02, z: 0}
+--- !u!195 &2904133524687268773
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509983327167082222}
+  m_Enabled: 1
+  m_AgentTypeID: 1479372276
+  m_Radius: 0.1
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 3.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7497161422607681661
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +390,7 @@ GameObject:
   - component: {fileID: 7272501100268742968}
   - component: {fileID: 7926436154545811166}
   - component: {fileID: 3606504702268383675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: botBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +495,7 @@ GameObject:
   - component: {fileID: 164917951043374583}
   - component: {fileID: 6777410093218769212}
   - component: {fileID: 195696826301222318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

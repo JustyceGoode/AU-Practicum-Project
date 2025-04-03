@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     //public GameObject enemyGun;
 
     //Enemy movement variables
-    private float speed = 1.0f;
+    //private float speed = 1.0f;
     private Rigidbody enemyRb;
     public GameObject player;
     private int xBoundary = 15;
@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
     //Explosion particle variables
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
+
+    public UnityEngine.AI.NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -69,16 +71,18 @@ public class Enemy : MonoBehaviour
 
             dist = Vector3.Distance(transform.position, player.transform.position);
 
-            if(dist > 3.25f){
-                //enemyRb.AddForce(followDirection * speed);
-                //Vector3 movement = followDirection * speed;
-                enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-            }
-            else if(dist < 2.75f){
-                //enemyRb.AddForce(-followDirection * speed);
-                //Vector3 movement = followDirection * speed;
-                enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
-            }
+            agent.SetDestination(player.transform.position);
+
+            // if(dist > 3.25f){
+            //     //enemyRb.AddForce(followDirection * speed);
+            //     //Vector3 movement = followDirection * speed;
+            //     enemyRb.MovePosition(enemyRb.position + followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            // }
+            // else if(dist < 2.75f){
+            //     //enemyRb.AddForce(-followDirection * speed);
+            //     //Vector3 movement = followDirection * speed;
+            //     enemyRb.MovePosition(enemyRb.position - followDirection * speed * Time.fixedDeltaTime * Time.timeScale);
+            // }
 
             //Keep enemy in bounds
             if(transform.position.x > xBoundary){
@@ -93,6 +97,10 @@ public class Enemy : MonoBehaviour
             if(transform.position.z < -zBoundary){
                 transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
             }
+        }
+        else{
+            agent.ResetPath();
+            //Debug.Log("Game is paused");
         }
 
         // if(dist > 3.25f){
@@ -140,6 +148,7 @@ public class Enemy : MonoBehaviour
         if(other.gameObject.CompareTag("Player")){
             healthPoints -= PlayerController.attackDamage;
             //Debug.Log("Enemy HP: " + healthPoints);
+            //Debug.Log("Enemy Collision Detected");
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Enemy")){

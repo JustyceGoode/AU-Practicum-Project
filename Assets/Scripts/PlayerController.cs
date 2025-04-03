@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     
     private Rigidbody playerRb;
-    private float speed = 2.0f;
+    private float speed = 6f; //Old: 2.0f
 
     //World Boundary
-    private int xBoundary = 20;
-    private int zBoundary = 10;
+    private int xBoundary = 23;
+    private int zBoundary = 14;
 
     //Bullets
     public GameObject bulletPrefab;
@@ -292,6 +292,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy")){
             healthPoints -= Enemy.damage;
             //Debug.Log("Player Health Bar: " + healthPoints);
+            //Debug.Log("Player Collision Detected");
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("Item")){

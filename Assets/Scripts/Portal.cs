@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour
             if(timePassed > 5f){
                 //Debug.Log("Strong Enemy Chance: " + WaveManager.strongEnemyChance);
                 int enemyIndex = DiceRoller(WaveManager.strongEnemyChance);
-                Instantiate(enemyPrefabs[enemyIndex], transform.position + new Vector3(0,3f,0), enemyPrefabs[enemyIndex].transform.rotation);
+                Instantiate(enemyPrefabs[enemyIndex], transform.position + enemySpawnPosition(), enemyPrefabs[enemyIndex].transform.rotation);
                 timePassed = 0f;
             }
         }
@@ -64,5 +64,18 @@ public class Portal : MonoBehaviour
         else{
             return 0;
         }
+    }
+
+    private Vector3 enemySpawnPosition(){
+        Vector3[] enemySpawnPoints = {
+            new Vector3(3.5f, 3f, 0),
+            new Vector3(-3.5f, 3f, 0),
+            new Vector3(0, 3f, 3.5f),
+            new Vector3(0, 3f, -3.5f)
+        };
+
+        int pointIndex = Random.Range(0,4);
+        //Debug.Log(pointIndex);
+        return enemySpawnPoints[pointIndex];
     }
 }
