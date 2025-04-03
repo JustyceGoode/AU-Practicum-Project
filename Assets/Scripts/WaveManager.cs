@@ -220,13 +220,13 @@ public class WaveManager : MonoBehaviour
     }
 
     private Vector3 GeneratePortalSpawnPosition(){
-        int pointIndex = Random.Range(0,5);
+        int pointIndex = Random.Range(0,6);
         return portalSpawnPoints[pointIndex];
     }
 
     private Vector3 GenerateEnemySpawnPosition(){
-        int enemyXPoint = Random.Range(-9,9);
-        int enemyZPoint = Random.Range(-4,4);
+        int enemyXPoint = Random.Range(-9,10);
+        int enemyZPoint = Random.Range(-4,5);
         return new Vector3(enemyXPoint,2,enemyZPoint);
     }
 
@@ -310,7 +310,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private int DiceRoller(float strongChance){
-        float temp = Random.Range(1,10);
+        float temp = Random.Range(1,11);
         if(temp < strongChance * 10){
             return 1;
         }

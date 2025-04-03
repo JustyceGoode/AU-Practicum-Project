@@ -71,10 +71,11 @@ public class Portal : MonoBehaviour
             new Vector3(3.5f, 3f, 0),
             new Vector3(-3.5f, 3f, 0),
             new Vector3(0, 3f, 3.5f),
-            new Vector3(0, 3f, -3.5f),
+            new Vector3(0, 3f, -3.5f)
         };
 
-        int pointIndex = Random.Range(0,3);
+        int pointIndex = Random.Range(0,4);
+        //Debug.Log(pointIndex);
         return enemySpawnPoints[pointIndex];
     }
 }
