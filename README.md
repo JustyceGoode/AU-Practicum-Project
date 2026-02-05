@@ -6,6 +6,14 @@ This is a project for my practicum course.
 
 This is a Unity game where a player robot has to fight enemy robots in successive waves.
 
+## Screenshots
+
+<img src="Screenshots/TitleScreen.png" width="75%"/>
+
+<img src="Screenshots/Gameplay1.png" width="75%"/>
+
+<img src="Screenshots/Gameplay2.png" width="75%"/>
+
 ## Credits
 
 ### Assets
